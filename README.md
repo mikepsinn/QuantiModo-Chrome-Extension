@@ -1,2 +1,2 @@
-QuantiModo-Chome
+QuantiModo-ChromeExtension
 ================

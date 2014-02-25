@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+
+  "name": "QuantiMo.do",
+  "description": "An easy to use add a measurement to your QuantiMoDo database.",
+  "version": "1.0",
+  "options_page": "options/options.html",
+  "icons": {"16"	: "images/icon_16.png",
+			"48"	: "images/icon_48.png",
+            "128"	: "images/icon_128.png" },
+  "permissions": [
+	"alarms",
+	"notifications",
+	"storage",
+    "https://quantimo.do/*"
+  ],
+  "browser_action": {
+    "default_icon": "images/add.png",
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "scripts": ["js/background.js"],
+    "persistent": false
+  }
+}
