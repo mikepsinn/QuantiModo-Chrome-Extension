@@ -4,100 +4,169 @@
 	<title>MoodiModo - Rate your mood!</title>
 	<style>
 	body{
-		width: 70px;
-		height: 56px;
+		width: 300px;
+		height: 290px;
 		margin: 0px;
 	}
 
-	#sectionRateMood{
-		opacity: 1;
-		height: 56px;
+	.dialog {
 		overflow: hidden;
+		padding: 10px;
+		background: #fbfbfb;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;	
+		z-index: 1000001;
+		position: fixed;
+		width: 280px;
+		height: 290px;
+		margin: auto;
+		color: #808080;
 	}
-	
-	#sectionRateMood img
-	{
-		height: 100%;
-		display: inline-block;
-		padding-left: 6px;
-		padding-right: 6px;
+
+	#addmeasurement-dialog-background{
+		opacity: 0.5;
+	}
+	#addmeasurement-dialog{
+		max-width: 500px;
+		opacity: 1;
+	}
+
+	#addmeasurement-dialog-content{
+		overflow:hidden;
+		width: 100%;
+		box-sizing:border-box;
 		background-color: #FFFFFF;
-		transition: background-color 300ms linear;
+		padding-left: 5%;
+		padding-right: 5%;
+		margin-left: auto;
+		margin-right: auto;
+		border-bottom: solid 3px #DDDDDD;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		font-size: 1em;
 	}
-	#sectionRateMood img:hover
-	{
-		background-color: #F0F0F0;
-	}
-	#sectionRateMood div
-	{
-		width: 1px;
-		position: relative;
-		display: inline-block;
-		background: lightgray;
-		bottom: 32%;
+
+
+	.addmeasurement-header{
+		width: 100%;
+		height: 42px;
+		color: #fff;
+		display: block;
+		font-size: 1.2em;
+		text-indent: 14px;
+		cursor: pointer;
+		margin-top: 12px;
+		margin-bottom: 10px;
 	}
 	
-	#sectionSendingMood{
-		display: none;
-		opacity: 0;
-		width: 346px;
-		height: 50px;
-		transition: opacity 400ms linear;
+	.addmeasurement-content .inner{
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
 
-		font-family: news-gothic-std, sans-serif;
-		font-size: 40px;
-		font-weight: 800;
-		top: 2px;
+	/**************/
+	/*Var Settings*/
+	/**************/
+	#addmeasurement-dialog-header{
+		color: #fff;
+		background: #29bdca;
+		border-bottom: solid 3px #229DA5;
+		cursor: auto;
+	}
+
+	#addmeasurement-dialog-content b{
+		font-size: 1.05em;
+		display:block;
+		color: #29bdca;
+	}
+	#addmeasurement-dialog-content table{
+		border: none;
+		margin:0px;
+		margin-bottom: 10px;
+		border-collapse:collapse;
+	}
+	
+	#addmeasurement-dialog-content table input{
+		font-size: 1em;
+		width:100%;
+	}
+	
+	#addmeasurement-dialog-content td{
+		padding-bottom:4px;
+		padding-top: 4px;
+		border: none;
+		vertical-align:middle;
+	}
+	#addmeasurement-dialog-content td:first-child{
+		padding-left:8px;
+	}
+	#addmeasurement-dialog-content td:last-child{
+		float:right;
+		width: 150px;
+	}
+	#addmeasurement-dialog-content div{
+		padding-left: 8px;
+		padding-bottom:4px;
+		padding-top: 4px;
+		border: none;
+		vertical-align:middle;
+	}
+
+	#addmeasurement-dialog-content td:first-child{
+		white-space: nowrap;
+	}
+
+	.ui-autocomplete { 
+		position: absolute; 
+		cursor: default;
+		z-index:1200000 !important;
+	} 
+
+	.ui-autocomplete-category {
+		font-weight: bold;
+		padding: .2em .4em;
+		margin: .8em 0 .2em;
+		line-height: 1.5;
+	}
+
+	.xdsoft_datetimepicker {
+		z-index:1200000 !important;
+	}
+	
+	button {
+		-webkit-box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		-moz-box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		background-image: none;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		-ms-border-radius: 3px;
+		-o-border-radius: 3px;
+		border-radius: 3px;
+		text-shadow: none;
+		-webkit-transition: background-color 0.2s;
+		-moz-transition: background-color 0.2s;
+		-o-transition: background-color 0.2s;
+		transition: background-color 0.2s;
+		background-color: #29bdca;
+		border: none;
+		color: white !important;
+		line-height: 20px;
+		padding: 8px 15px;
 		text-align: center;
-		font-style: italic;
-		color: #bc2e1e;
-		text-shadow: 0 1px 0px #378ab4, 1px 0 0px #5dabcd, 1px 2px 1px #378ab4, 2px 1px 1px #5dabcd, 2px 3px 2px #378ab4, 3px 2px 2px #5dabcd, 3px 4px 2px #378ab4, 4px 3px 3px #5dabcd, 4px 5px 3px #378ab4, 5px 4px 2px #5dabcd, 5px 6px 2px #378ab4, 6px 5px 2px #5dabcd, 6px 7px 1px #378ab4, 7px 6px 1px #5dabcd, 7px 8px 0px #378ab4, 8px 7px 0px #5dabcd;
+		font-size: 1em;
 	}
-
-	.invisible {
-		-webkit-animation-name: fadeOut;
-		-webkit-animation-duration:0.4s;
-		-webkit-animation-iteration-count: 1;
-		-webkit-animation-timing-function: ease;
-		-webkit-animation-fill-mode: forwards;
+	
+	button: hover{
+		background-color: #19adaa;
 	}
-	@-webkit-keyframes fadeOut {
-		from {
-			-webkit-transform: rotate(0deg) scale(1) skew(0deg);
-			opacity: 1;
-		}
-		to {
-			-webkit-transform: rotate(0deg) scale(0.98) skew(0deg);
-			opacity: 0;
-		}
-	}
-
-	.visible {
-		-webkit-animation-name: fadeIn;
-		-webkit-animation-duration:0.3s;
-		-webkit-animation-iteration-count: 1;
-		-webkit-animation-timing-function: ease;
-		-webkit-animation-fill-mode: forwards;
-	}
-	@-webkit-keyframes fadeIn {
-		from {
-			-webkit-transform: rotate(0deg) scale(1.02) skew(0deg);
-			opacity: 0;		
-		}
-		to {
-			-webkit-transform: rotate(0deg) scale(1) skew(0deg);
-			opacity: 1;
-		}
+	.buttonrow-2 {
+		margin: auto;
+		width: 49%;
 	}
 	</style>
 
-	<section id="sectionRateMood">
-		<img src="/images/add.png" id="buttonAddMeasurement">
-		</img>
-	</section>
-	<section id="sectionSendingMood">
 
-	</section>
 	<!--
 	  - JavaScript and HTML must be in separate files: see our Content Security
 	  - Policy documentation[1] for details and explanation.
@@ -107,6 +176,38 @@
 	<script src="js/popup.js"></script>
   </head>
   <body>
+  	<div class="dialog" id="addmeasurement-dialog">
+	<div class="addmeasurement-header" id="addmeasurement-dialog-header">
+		<div style="float: left; line-height: 42px;">
+			Add a Measurement
+		</div>
+	</div>
+	<div class="addmeasurement-content" id="addmeasurement-dialog-content">
+		<table border="0" cellspacing="0">
+			<tr>
+				<td>Variable</td>
+				<td><input type="text" placeholder="" id="addmeasurement-variable-name"></td>
+			</tr>
+			<tr>
+				<td>Value</td>
+				<td><input id="addmeasurement-variable-value" type="text" placeholder=""></td>
+			</tr>
+			<tr>
+				<td>Unit</td>
+				<td><input id="addmeasurement-variable-unit" type="text" placeholder=""></td>
+			</tr>
+			<tr>
+				<td>Date & Time</td>
+				<td><input id="addmeasurement-variable-datetime" type="text" placeholder=""></td>
+			</tr>
+		</table>
+	
+		<button id="button-add" class="button-cancel buttonrow-2">Add</button>
+		<button  id="button-close" class="button-save buttonrow-2" style="margin-bottom: 12px">Cancel</button>
+	
+	</div>
+	</div>
+
   </body>
 </html>
 

@@ -93,7 +93,8 @@ chrome.tabs.getSelected(null, function(tab){
 function pushMeasurements(measurements, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "https://quantimo.do/api/measurements/v2", true);
+	xhr.open("POST", "https://localhost/api/measurements/v2", true);
+	//xhr.open("POST", "https://quantimo.do/api/measurements/v2", true);
 	xhr.onreadystatechange = function() 
 		{
 			// If the request is completed

@@ -7,23 +7,29 @@ function clearNotifications()
 
 function setButtonListeners()
 {
-	document.getElementById('buttonAddMeasurement').onclick=onAddButtonClicked;
+	document.getElementById('button-add').onclick=onAddButtonClicked;
+	document.getElementById('button-close').onclick=onCloseButtonClicked;
+}
+
+var onCloseButtonClicked = function()
+{
+	window.close();
 }
 
 var onAddButtonClicked = function()
 {
 	// Figure out what rating was selected
-	alert('add a measurement is clicked');
+	//alert('add a measurement is clicked');
 	//var backPage = chrome.extension.getBackgroundPage();
 	//console.log(backPage);
 	
 	//backPage.AnalyzePage.showAddMeasurementDialog();
-	/*
+	
 	// Create an array of measurements
 	var measurements = 	[
 							{
 								timestamp: 	Math.floor(Date.now() / 1000), 
-								value: 		moodValue
+								value: 		0.97
 							}
 						];
 	// Add it to a request, payload is what we'll send to QuantiModo
@@ -32,19 +38,21 @@ var onAddButtonClicked = function()
 							payload:[
 										{
 											measurements:			measurements,
-											name: 					"Overall Mood",
-											source: 				"MoodiModo",
-											category: 				"Mood",
-											combinationOperation: 	"MEAN",
-											unit:					"/5"
+											name: 					"Sleep Quality",
+											source: 				"QuantiMo.Do",
+											category: 				"Sleep",
+											combinationOperation: 	"",
+											unit:					"/1"
 										}
 									]
 									
 						};
 	// Request our background script to upload it for us
+	alert('calling' + request);
+	alert( JSON.stringify(request));
 	chrome.extension.sendMessage(request);
-	*/
-	clearNotifications();
+	alert('called' + request);
+	//clearNotifications();
 	window.close();
 	
 	/*var sectionRateMood = document.getElementById("sectionRateMood");
@@ -73,6 +81,7 @@ var onAddButtonClicked = function()
 
 document.addEventListener('DOMContentLoaded', function () 
 {
+	
 	var wDiff = (346 - window.innerWidth);
 	var hDiff = (60 - window.innerHeight);
 	
