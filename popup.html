@@ -91,6 +91,11 @@
 		width:100%;
 	}
 	
+	#addmeasurement-dialog-content table select{
+		font-size: 1em;
+		width:100%;
+	}
+	
 	#addmeasurement-dialog-content td{
 		padding-bottom:4px;
 		padding-top: 4px;
@@ -174,6 +179,16 @@
 	  - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
 	 -->
 	<script src="js/popup.js"></script>
+	<script src="js/jquery-1.10.2.js"></script>
+	<script src="js/jquery-ui-1.10.4.custom.js"></script>
+	<script src="js/jquery.datetimepicker.js"></script>
+	
+	<link rel="stylesheet" id="jquery-autocomplete-css" href="css/jquery-ui-1.10.4.custom.css" type="text/css" media="all">
+	<link rel="stylesheet" id="jquery-datetimepicker-css" href="css/jquery.datetimepicker.css" type="text/css" media="all">
+	<link rel="stylesheet" id="default" href="css/default.css" type="text/css" media="all">
+	
+	<!--<link rel="stylesheet" id="jquery-datetimepicker-css" href="http://localhost/wp-content/themes/Metrolium-qm/css/jquery.datetimepicker.css?ver=3.8" type="text/css" media="all">-->
+	
   </head>
   <body>
   	<div class="dialog" id="addmeasurement-dialog">
@@ -194,7 +209,7 @@
 			</tr>
 			<tr>
 				<td>Unit</td>
-				<td><input id="addmeasurement-variable-unit" type="text" placeholder=""></td>
+				<td><select id="addmeasurement-variable-unit"></select></td>
 			</tr>
 			<tr>
 				<td>Date & Time</td>

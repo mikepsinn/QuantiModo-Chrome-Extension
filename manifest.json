@@ -4,10 +4,11 @@
   "name": "QuantiMo.do",
   "description": "An easy to use add a measurement to your QuantiMoDo database.",
   "version": "1.0",
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "options_page": "options/options.html",
-  "icons": {"16"	: "images/icon_16.png",
-			"48"	: "images/icon_48.png",
-            "128"	: "images/icon_128.png" },
+  "icons": {"16"	: "images/photo.png",
+			"48"	: "images/photo.png",
+            "128"	: "images/photo.png" },
   "permissions": [
 	"alarms",
 	"notifications",
@@ -15,7 +16,7 @@
     "https://quantimo.do/*"
   ],
   "browser_action": {
-    "default_icon": "images/add.png",
+    "default_icon": "images/photo.png",
     "default_popup": "popup.html"
   },
   "background": {

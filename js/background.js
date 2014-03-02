@@ -76,8 +76,25 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
 	console.log("Received request: " + request.message);
 	if(request.message == "uploadMeasurements") 
 	{
-		pushMeasurements(request.payload, null);
+		uploadMeasurements(request.payload, function (responseText) {
+			sendResponse(responseText);
+        });
+		return true;
+	} else if(request.message == "getVariables") 
+	{
+		getVariables(request.params, function (responseText) {
+			sendResponse(responseText);
+        });
+		return true;
+	} else if(request.message == "getVariableUnits") 
+	{
+		getVariableUnits(request.params, function (responseText) {
+
+			sendResponse(responseText);
+        });
+		return true;
 	}
+	
 });
 
 chrome.tabs.getSelected(null, function(tab){
@@ -90,19 +107,16 @@ chrome.tabs.getSelected(null, function(tab){
 ****	HELPER FUNCTIONS
 ***/
 
-function pushMeasurements(measurements, onDoneListener)
+function uploadMeasurements(measurements, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "https://localhost/api/measurements/v2", true);
-	//xhr.open("POST", "https://quantimo.do/api/measurements/v2", true);
+	//xhr.open("POST", "https://localhost/api/measurements/v2", true);
+	xhr.open("POST", "https://quantimo.do/api/measurements/v2", true);
 	xhr.onreadystatechange = function() 
 		{
 			// If the request is completed
 			if (xhr.readyState == 4) 
 			{
-				console.log("QuantiModo responds:");
-				console.log(xhr.responseText);
-				
 				if(onDoneListener != null)
 				{
 					onDoneListener(xhr.responseText);
@@ -110,4 +124,42 @@ function pushMeasurements(measurements, onDoneListener)
 			}
 		};
 	xhr.send(JSON.stringify(measurements));
+}
+
+function getVariables(params, onDoneListener)
+{
+	var xhr = new XMLHttpRequest();
+	//xhr.open("POST", "https://localhost/api/measurements/v2", true);
+	xhr.open("GET", "https://quantimo.do/api/variables", true);
+	xhr.onreadystatechange = function() 
+		{
+			// If the request is completed
+			if (xhr.readyState == 4) 
+			{
+				if(onDoneListener != null)
+				{
+					onDoneListener(xhr.responseText);
+				}
+			}
+		};
+	xhr.send(JSON.stringify(params));
+}
+
+function getVariableUnits(params, onDoneListener)
+{
+	var xhr = new XMLHttpRequest();
+	//xhr.open("POST", "https://localhost/api/measurements/v2", true);
+	xhr.open("GET", "https://quantimo.do/api/units", true);
+	xhr.onreadystatechange = function() 
+		{
+			// If the request is completed
+			if (xhr.readyState == 4) 
+			{
+				if(onDoneListener != null)
+				{
+					onDoneListener(xhr.responseText);
+				}
+			}
+		};
+	xhr.send(JSON.stringify(params));
 }

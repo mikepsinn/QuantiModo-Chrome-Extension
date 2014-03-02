@@ -14,7 +14,10 @@ function setButtonListeners()
 var onCloseButtonClicked = function()
 {
 	window.close();
+
 }
+
+var variables = [];
 
 var onAddButtonClicked = function()
 {
@@ -26,10 +29,16 @@ var onAddButtonClicked = function()
 	//backPage.AnalyzePage.showAddMeasurementDialog();
 	
 	// Create an array of measurements
+	
+	var name = $("#addmeasurement-variable-name").val();
+	var unit = $("#addmeasurement-variable-unit").val();
+	var value = $("#addmeasurement-variable-value").val();
+	var datetime = $("#addmeasurement-variable-datetime").val();
+	var variable = getVariableWithName(name);
 	var measurements = 	[
 							{
-								timestamp: 	Math.floor(Date.now() / 1000), 
-								value: 		0.97
+								timestamp: 	Math.floor(new Date(datetime).getTime()  / 1000), 
+								value: 		value
 							}
 						];
 	// Add it to a request, payload is what we'll send to QuantiModo
@@ -38,45 +47,98 @@ var onAddButtonClicked = function()
 							payload:[
 										{
 											measurements:			measurements,
-											name: 					"Sleep Quality",
+											name: 					variable.name,
 											source: 				"QuantiMo.Do",
-											category: 				"Sleep",
-											combinationOperation: 	"",
-											unit:					"/1"
+											category: 				variable.category,
+											combinationOperation: 	variable.combinationOperation,
+											unit:					unit
 										}
 									]
 									
 						};
-	// Request our background script to upload it for us
-	alert('calling' + request);
-	alert( JSON.stringify(request));
-	chrome.extension.sendMessage(request);
-	alert('called' + request);
-	//clearNotifications();
-	window.close();
-	
-	/*var sectionRateMood = document.getElementById("sectionRateMood");
-	var sectionSendingMood = document.getElementById("sectionSendingMood");
-	
-	sectionRateMood.className = "invisible";
-	setTimeout(function()
-	{
-			sectionRateMood.style.display = "none";
 
-			sectionSendingMood.innerText = "Sending mood";
-			sectionSendingMood.style.display = "block";
-			sectionSendingMood.className = "visible";
-			pushMeasurement(measurement, function(response) 
-				{
-					sectionSendingMood.className = "invisible";
-					setTimeout(function()
-					{
-						window.close();
-					}, 300);
-				});
-				
-			clearNotifications();
-		}, 400 );*/
+	chrome.extension.sendMessage(request, function(responseText) {
+		
+		var response = $.parseJSON(responseText);
+		if(response.success == true)
+		{
+			alert("Added a measurement successfully.");
+			document.getElementById('addmeasurement-variable-value').value = "";
+			window.close();
+		}
+		else
+		{
+			alert("Adding a measurement failed.");
+			console.log(responseText);
+		}
+	});
+	//clearNotifications();
+	
+}
+
+var getVariableWithName = function(variableName)
+{
+	for(var i=0; i<variables.length; i++)
+	{
+		if(variables[i].name == variableName)
+			return variables[i];
+	}
+}
+var loadVariables = function()
+{
+	$.widget( "custom.catcomplete", $.ui.autocomplete, {
+			_renderMenu: function( ul, items ) {
+			  var that = this,
+				currentCategory = "";
+			  $.each( items, function( index, item ) {
+				if ( item.category != currentCategory ) {
+				  ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+				  currentCategory = item.category;
+				}
+				that._renderItemData( ul, item );
+			  });
+			}
+		  });
+		  
+	var request = {message: "getVariables", params: {}};
+	chrome.extension.sendMessage(request, function(responseText) {
+		//unitSelect = document.getElementById('addmeasurement-variable-name');
+		variables = $.parseJSON(responseText);
+		var varnames = [];
+		$.each(variables, function(_, variable)
+		{
+			varnames.push({label: variable.name, category: variable.category});
+		});
+		$("#addmeasurement-variable-name").catcomplete({
+			source: varnames,
+			select: function (event, ui) {
+				var variable = getVariableWithName(ui.item.label);
+				$('#addmeasurement-variable-unit').val(variable.unit);
+			}
+		});
+	});
+}
+
+var loadVariableUnits = function()
+{
+	var request = {message: "getVariableUnits", params: {}};
+	chrome.extension.sendMessage(request, function(responseText) {
+		unitSelect = document.getElementById('addmeasurement-variable-unit');
+		units = $.parseJSON(responseText);
+		$.each(units.sort(function(a, b)
+		{
+			return a.name.localeCompare(b.name);
+		}), function(_, unit){
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+		});
+	});
+}
+
+var loadDateTime = function()
+{
+	$("#addmeasurement-variable-datetime").datetimepicker();
+	var currentTime = new Date();
+	$("#addmeasurement-variable-datetime").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate() + ' ' + currentTime.getHours() + ':00');
 }
 
 document.addEventListener('DOMContentLoaded', function () 
@@ -88,4 +150,8 @@ document.addEventListener('DOMContentLoaded', function ()
 	window.resizeBy(wDiff, hDiff);
 
 	setButtonListeners();
+	loadVariables();
+	loadVariableUnits();
+	loadDateTime();
+	$("#addmeasurement-variable-name").focus();
 });

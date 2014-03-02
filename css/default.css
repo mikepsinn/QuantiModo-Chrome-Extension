@@ -1,0 +1,19 @@
+.ui-autocomplete { 
+	position: absolute; 
+	cursor: default;
+	
+}
+
+.ui-widget { 
+	position: absolute; 
+	cursor: default;
+	max-height: 160px;
+}
+
+.ui-autocomplete-category {
+	font-size:14px;
+}
+.ui-menu .ui-menu-item {
+	font-size: 14px;
+	background-color: #fff;
+}
