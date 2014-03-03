@@ -12,13 +12,13 @@ chrome.runtime.onInstalled.addListener(function()
 	
 	if(notificationInterval == -1)
 	{
-		chrome.alarms.clear("moodReportAlarm");
+		chrome.alarms.clear("trackReportAlarm");
 		console.log("Alarm cancelled");
 	}
 	else
 	{
 		var alarmInfo = {periodInMinutes: notificationInterval}
-		chrome.alarms.create("moodReportAlarm", alarmInfo)
+		chrome.alarms.create("trackReportAlarm", alarmInfo)
 		console.log("Alarm set, every " + notificationInterval + " minutes");
 	}
 });
@@ -34,11 +34,11 @@ chrome.alarms.onAlarm.addListener(function(alarm)
 		var notificationParams = {
 			type: "basic",
 			title: "How are you?",
-			message: "It's time to report your mood!",
-			iconUrl: "images/icon_full.png",
+			message: "It's time to add a measurement data!",
+			iconUrl: "images/photo.png",
 			priority: 2
 		}
-		chrome.notifications.create("moodReportNotification", notificationParams, function(id){});
+		chrome.notifications.create("trackReportNotification", notificationParams, function(id){});
 	}
 	
 	var showBadge = (localStorage["showBadge"] || "true") == "true" ? true : false;
@@ -50,16 +50,16 @@ chrome.alarms.onAlarm.addListener(function(alarm)
 });
 
 /*
-**	Called when the "report your mood" notification is clicked
+**	Called when the "add a measurement" notification is clicked
 */
 chrome.notifications.onClicked.addListener(function(notificationId)
 {
-	if(notificationId == "moodReportNotification")
+	if(notificationId == "trackReportNotification")
 	{
 		var windowParams = {url: "popup.html", 
 							type: 'panel',
-							width: 346,
-							height: 70,
+							width: 300,
+							height: 290,
 							top: screen.height,
 							left: screen.width
 						   };

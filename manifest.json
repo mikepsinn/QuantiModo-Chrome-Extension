@@ -4,6 +4,7 @@
   "name": "QuantiMo.do",
   "description": "An easy to use add a measurement to your QuantiMoDo database.",
   "version": "1.0",
+  "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "icons": {"16"	: "images/photo.png",
 			"48"	: "images/photo.png",

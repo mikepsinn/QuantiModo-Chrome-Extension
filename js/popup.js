@@ -2,7 +2,7 @@ function clearNotifications()
 {
 	var badgeParams = {text:""};
 	chrome.browserAction.setBadgeText(badgeParams);
-	chrome.notifications.clear("moodReportNotification", function(){});
+	chrome.notifications.clear("trackReportNotification", function(){});
 }
 
 function setButtonListeners()
@@ -72,7 +72,7 @@ var onAddButtonClicked = function()
 			console.log(responseText);
 		}
 	});
-	//clearNotifications();
+	clearNotifications();
 	
 }
 
@@ -144,8 +144,8 @@ var loadDateTime = function()
 document.addEventListener('DOMContentLoaded', function () 
 {
 	
-	var wDiff = (346 - window.innerWidth);
-	var hDiff = (60 - window.innerHeight);
+	var wDiff = (330 - window.innerWidth);
+	var hDiff = (300 - window.innerHeight);
 	
 	window.resizeBy(wDiff, hDiff);
 	setButtonListeners();
