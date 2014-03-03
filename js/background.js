@@ -34,7 +34,7 @@ chrome.alarms.onAlarm.addListener(function(alarm)
 		var notificationParams = {
 			type: "basic",
 			title: "How are you?",
-			message: "It's time to add a measurement data!",
+			message: "It's time to add a measurement!",
 			iconUrl: "images/photo.png",
 			priority: 2
 		}
