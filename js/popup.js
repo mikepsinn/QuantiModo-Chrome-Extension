@@ -148,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function ()
 	var hDiff = (60 - window.innerHeight);
 	
 	window.resizeBy(wDiff, hDiff);
-
 	setButtonListeners();
 	loadVariables();
 	loadVariableUnits();
