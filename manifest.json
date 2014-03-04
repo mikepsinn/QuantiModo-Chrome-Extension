@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "QuantiMo.do",
-  "description": "An easy to use add a measurement to your QuantiMoDo database.",
+  "name": "QuantiModo",
+  "description": "Track anything in seconds by just clicking the QuantiModo button in your browser!",
   "version": "1.0",
   "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
