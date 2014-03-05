@@ -1,9 +1,10 @@
 
 body{
 		width: 300px;
-		height: 450px;
+		height: 500px;
 		margin: 5px 0px 5px 0px;
 		background: #eeeeee;
+		overflow: hidden !important;
 	}
 
 	.dialog {
@@ -15,7 +16,7 @@ body{
 		z-index: 1000001;
 		position: fixed;
 		width: 290px;
-		height: 450px;
+		height: 500px;
 		margin: auto;
 		color: #808080;
 	}

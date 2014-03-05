@@ -225,7 +225,7 @@ var loadDateTime = function()
 	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
 	
 	hourSelect = document.getElementById('addmeasurement-variable-timeh');
-	for(var i=0; i<24; i++)
+	for(var i=0; i<12; i++)
 		hourSelect.options[i] = new Option(i, i);
 	minSelect = document.getElementById('addmeasurement-variable-timem');
 	for(var i=0; i<60; i++)
