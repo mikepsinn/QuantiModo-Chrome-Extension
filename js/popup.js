@@ -238,7 +238,11 @@ var loadDateTime = function()
 	var currentTime = new Date();
 	$('#addmeasurement-variable-timeh').val(currentTime.getHours() % 12);
 	$('#addmeasurement-variable-timem').val(currentTime.getMinutes());
-	$('#addmeasurement-variable-times').val(0);
+	if(currentTime.getHours() >= 12)
+		$('#addmeasurement-variable-timeap').val(1);
+	else
+		$('#addmeasurement-variable-timeap').val(0);
+	
 	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
 }
 
