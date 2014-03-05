@@ -52,7 +52,7 @@ var onAddButtonClicked = function()
 	if (value == '') {
 		alert("Please enter the value."); return;
 	}
-	var variable = getVariableWithName(name);
+	//var variable = getVariableWithName(name);
 	var measurements = 	[
 							{
 								timestamp: 	Math.floor(datetime.getTime()  / 1000), 
@@ -65,7 +65,7 @@ var onAddButtonClicked = function()
 							payload:[
 										{
 											measurements:			measurements,
-											name: 					variable.name,
+											name: 					name,
 											source: 				"QuantiMo.Do",
 											category: 				valueCategory,
 											combinationOperation: 	combineOp,
@@ -159,6 +159,7 @@ var loadVariables = function()
 			source: varnames,
 			select: function (event, ui) {
 				var variable = getVariableWithName(ui.item.label);
+				$("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
 				if (variable == null) return;
 				$( "#addmeasurement-variable-category").val(variable.category);
 				var variableUnit = getUnitWithAbbriatedName(variable.unit);
