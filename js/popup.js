@@ -40,12 +40,13 @@ var onAddButtonClicked = function()
 	
 	var hour = $('#addmeasurement-variable-timeh').val();
 	var min = $('#addmeasurement-variable-timem').val();
-	var sec = $('#addmeasurement-variable-times').val();
+	var ap = $('#addmeasurement-variable-timeap').val();
 	var datetime = new Date(datetimeString);
-	datetime.setHours(hour);
+	datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
-	datetime.setSeconds(sec);
-	
+	datetime.setSeconds(0);
+	alert(datetime);
+	exit;
 	if (name == '') {
 		alert("Please enter the variable name."); return;
 	}
@@ -221,7 +222,7 @@ var loadDateTime = function()
       selectOtherMonths: true
     });
 	$("#addmeasurement-variable-date").datepicker("setDate", new Date());
-	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "yy-mm-dd");
+	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
 	
 	hourSelect = document.getElementById('addmeasurement-variable-timeh');
 	for(var i=0; i<24; i++)
@@ -229,9 +230,9 @@ var loadDateTime = function()
 	minSelect = document.getElementById('addmeasurement-variable-timem');
 	for(var i=0; i<60; i++)
 		minSelect.options[i] = new Option(i, i);
-	secondSelect = document.getElementById('addmeasurement-variable-times');
-	for(var i=0; i<60; i++)
-		secondSelect.options[i] = new Option(i, i);
+	ampmSelect = document.getElementById('addmeasurement-variable-timeap');
+	ampmSelect.options[0] = new Option("AM", 0);
+	ampmSelect.options[1] = new Option("PM", 1);
 	
 	var currentTime = new Date();
 	$('#addmeasurement-variable-timeh').val(currentTime.getHours());
