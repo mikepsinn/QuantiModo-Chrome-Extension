@@ -1,3 +1,26 @@
+
+body{
+		width: 300px;
+		height: 450px;
+		margin: 5px 0px 5px 0px;
+		background: #eeeeee;
+	}
+
+	.dialog {
+		overflow: hidden;
+		padding: 5px;
+		background: transparent;
+		-webkit-border-radius: 3px;
+		border-radius: 3px;	
+		z-index: 1000001;
+		position: fixed;
+		width: 290px;
+		height: 450px;
+		margin: auto;
+		color: #808080;
+	}
+
+
 .ui-autocomplete { 
 	position: absolute; 
 	cursor: default;
@@ -7,7 +30,6 @@
 .ui-widget { 
 	position: absolute; 
 	cursor: default;
-	max-height: 160px;
 }
 
 .ui-autocomplete-category {
@@ -16,4 +38,163 @@
 .ui-menu .ui-menu-item {
 	font-size: 14px;
 	background-color: #fff;
+	margin-bottom: 1px;
 }
+
+.ui-datepicker {
+	font-size: 13px !important;
+}	
+
+	#addmeasurement-dialog-background{
+		opacity: 0.5;
+	}
+	#addmeasurement-dialog{
+		max-width: 500px;
+		opacity: 1;
+	}
+
+	#addmeasurement-dialog-content{
+		overflow:hidden;
+		width: 100%;
+		box-sizing:border-box;
+		padding-left: 2%;
+		padding-right: 2%;
+		margin-left: auto;
+		margin-right: auto;
+		border-bottom: solid 3px #DDDDDD;
+		border-bottom-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		font-size: 1em;
+	}
+
+
+	.addmeasurement-header{
+		width: 100%;
+		height: 42px;
+		color: #fff;
+		display: block;
+		font-size: 1.2em;
+		text-indent: 14px;
+		cursor: pointer;
+		margin-top: 12px;
+		margin-bottom: 10px;
+	}
+	
+	.addmeasurement-content .inner{
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	/**************/
+	/*Var Settings*/
+	/**************/
+	#addmeasurement-dialog-header{
+		color: #fff;
+		background: #29bdca;
+		border-bottom: solid 3px #229DA5;
+		cursor: auto;
+	}
+
+	#addmeasurement-dialog-content b{
+		font-size: 1.05em;
+		display:block;
+		color: #29bdca;
+	}
+	#addmeasurement-dialog-content table{
+		margin: 0px;
+		margin-bottom: 10px;
+		/* border-collapse: collapse; */
+		/* border: 2px solid white; */
+		border-radius: 10px 10px 5px 5px;
+		background-color: #FFFFFF;
+		width: 100%;
+		padding: 10px;
+	}
+	
+	#addmeasurement-dialog-content table input[type=text]{
+		font-size: 1em;
+		width:100%;
+	}
+	
+	#addmeasurement-dialog-content table label{
+		font-size: 1.2em;
+	}
+	
+	#addmeasurement-dialog-content table select{
+		font-size: 1em;
+		width:100%;
+	}
+	
+	#addmeasurement-dialog-content td{
+		padding-bottom:4px;
+		padding-top: 4px;
+		border: none;
+		vertical-align:middle;
+		width: 100%;
+	}
+	#addmeasurement-dialog-content td:first-child{
+		padding-left:8px;
+	}
+	#addmeasurement-dialog-content td:last-child{
+		float:right;
+	}
+	#addmeasurement-dialog-content div{
+		padding-left: 8px;
+		padding-bottom:4px;
+		padding-top: 4px;
+		border: none;
+		vertical-align:middle;
+	}
+
+	#addmeasurement-dialog-content td:first-child{
+		white-space: nowrap;
+	}
+
+	.ui-autocomplete { 
+		position: absolute; 
+		cursor: default;
+		z-index:1200000 !important;
+	} 
+
+	.ui-autocomplete-category {
+		font-weight: bold;
+		padding: .2em .4em;
+		margin: .8em 0 .2em;
+		line-height: 1.5;
+	}
+
+	.xdsoft_datetimepicker {
+		z-index:1200000 !important;
+	}
+	
+	button {
+		-webkit-box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		-moz-box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
+		background-image: none;
+		-webkit-border-radius: 3px;
+		-moz-border-radius: 3px;
+		-ms-border-radius: 3px;
+		-o-border-radius: 3px;
+		border-radius: 3px;
+		text-shadow: none;
+		-webkit-transition: background-color 0.2s;
+		-moz-transition: background-color 0.2s;
+		-o-transition: background-color 0.2s;
+		transition: background-color 0.2s;
+		background-color: #29bdca;
+		border: none;
+		color: white !important;
+		line-height: 20px;
+		padding: 8px 15px;
+		text-align: center;
+		font-size: 1em;
+	}
+	
+	button: hover{
+		background-color: #19adaa;
+	}
+	.buttonrow-2 {
+		margin: auto;
+		width: 49%;
+	}

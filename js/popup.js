@@ -18,6 +18,7 @@ var onCloseButtonClicked = function()
 }
 
 var variables = [];
+var units = [];
 
 var onAddButtonClicked = function()
 {
@@ -33,11 +34,28 @@ var onAddButtonClicked = function()
 	var name = $("#addmeasurement-variable-name").val();
 	var unit = $("#addmeasurement-variable-unit").val();
 	var value = $("#addmeasurement-variable-value").val();
-	var datetime = $("#addmeasurement-variable-datetime").val();
+	var valueCategory = $("#addmeasurement-variable-category").val();
+	var combineOp = $("input:radio[name ='combineOperation']:checked").val();
+	var datetimeString = $("#addmeasurement-variable-date").val();
+	
+	var hour = $('#addmeasurement-variable-timeh').val();
+	var min = $('#addmeasurement-variable-timem').val();
+	var sec = $('#addmeasurement-variable-times').val();
+	var datetime = new Date(datetimeString);
+	datetime.setHours(hour);
+	datetime.setMinutes(min);
+	datetime.setSeconds(sec);
+	
+	if (name == '') {
+		alert("Please enter the variable name."); return;
+	}
+	if (value == '') {
+		alert("Please enter the value."); return;
+	}
 	var variable = getVariableWithName(name);
 	var measurements = 	[
 							{
-								timestamp: 	Math.floor(new Date(datetime).getTime()  / 1000), 
+								timestamp: 	Math.floor(datetime.getTime()  / 1000), 
 								value: 		value
 							}
 						];
@@ -49,8 +67,8 @@ var onAddButtonClicked = function()
 											measurements:			measurements,
 											name: 					variable.name,
 											source: 				"QuantiMo.Do",
-											category: 				variable.category,
-											combinationOperation: 	variable.combinationOperation,
+											category: 				valueCategory,
+											combinationOperation: 	combineOp,
 											unit:					unit
 										}
 									]
@@ -78,12 +96,25 @@ var onAddButtonClicked = function()
 
 var getVariableWithName = function(variableName)
 {
-	for(var i=0; i<variables.length; i++)
-	{
-		if(variables[i].name == variableName)
-			return variables[i];
-	}
+	var filteredVars = jQuery.grep(variables, function (variable, i) {
+			return variable.name == variableName;
+	});
+	
+	if (filteredVars.length > 0) return filteredVars[0];
+	return null;
 }
+
+var getUnitWithAbbriatedName = function(unitAbbr)
+{
+	var filteredUnits = jQuery.grep(units, function (unit, i) {
+			return unit.abbreviatedName == unitAbbr;
+	});
+	
+	if (filteredUnits.length > 0) return filteredUnits[0];
+	return null;
+}
+
+
 var loadVariables = function()
 {
 	$.widget( "custom.catcomplete", $.ui.autocomplete, {
@@ -105,15 +136,36 @@ var loadVariables = function()
 		//unitSelect = document.getElementById('addmeasurement-variable-name');
 		variables = $.parseJSON(responseText);
 		var varnames = [];
-		$.each(variables, function(_, variable)
+		var categories = [];
+		variableCategorySelect = document.getElementById('addmeasurement-variable-category');
+		$.each(variables.sort(function(a, b)
 		{
-			varnames.push({label: variable.name, category: variable.category});
+			return a.name.localeCompare(b.name);
+		}), function(_, variable)
+		{
+			//varnames.push({label: variable.name, category: variable.category});
+			varnames.push(variable.name);
+			if ($.inArray(variable.category, categories)==-1) {
+				categories.push(variable.category);
+			}
 		});
-		$("#addmeasurement-variable-name").catcomplete({
+		
+		categories.sort();
+		for(var i=0; i<categories.length; i++)
+			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+		
+		$("#addmeasurement-variable-name").autocomplete({
+		//$("#addmeasurement-variable-name").catcomplete({
 			source: varnames,
 			select: function (event, ui) {
 				var variable = getVariableWithName(ui.item.label);
-				$('#addmeasurement-variable-unit').val(variable.unit);
+				if (variable == null) return;
+				$( "#addmeasurement-variable-category").val(variable.category);
+				var variableUnit = getUnitWithAbbriatedName(variable.unit);
+				if (variableUnit == null) return;
+				$( "#addmeasurement-variable-unitCategory").val(variableUnit.category).trigger('change');
+				$( "#addmeasurement-variable-unit").val(variableUnit.abbreviatedName);
+				
 			}
 		});
 	});
@@ -121,24 +173,70 @@ var loadVariables = function()
 
 var loadVariableUnits = function()
 {
+	$( "#addmeasurement-variable-unitCategory" ).change(function() {
+		
+		var filteredUnits = jQuery.grep(units, function (unit, i) {
+			return unit.category == $( "#addmeasurement-variable-unitCategory" ).val();
+		});
+		$( "#addmeasurement-variable-unit option").remove();
+		unitSelect = document.getElementById('addmeasurement-variable-unit');
+		//unitSelect.options = [];
+		$.each(filteredUnits.sort(function(a, b)
+		{
+			return a.name.localeCompare(b.name);
+		}), function(_, unit){
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
+		});
+	});
+
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('addmeasurement-variable-unit');
+		unitCategorySelect = document.getElementById('addmeasurement-variable-unitCategory');
 		units = $.parseJSON(responseText);
+		var categories = [];
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+			//unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
+			if ($.inArray(unit.category, categories)==-1) {
+				categories.push(unit.category);
+			}
 		});
+		categories.sort();
+		for(var i=0; i<categories.length; i++)
+			unitCategorySelect.options[unitCategorySelect.options.length] = new Option(categories[i], categories[i]);
+
+		$( "#addmeasurement-variable-unitCategory").val(categories[0]).trigger('change');
 	});
 }
 
+
 var loadDateTime = function()
 {
-	$("#addmeasurement-variable-datetime").datetimepicker();
+	$("#addmeasurement-variable-date").datepicker({
+      showOtherMonths: true,
+      selectOtherMonths: true
+    });
+	$("#addmeasurement-variable-date").datepicker("setDate", new Date());
+	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "yy-mm-dd");
+	
+	hourSelect = document.getElementById('addmeasurement-variable-timeh');
+	for(var i=0; i<24; i++)
+		hourSelect.options[i] = new Option(i, i);
+	minSelect = document.getElementById('addmeasurement-variable-timem');
+	for(var i=0; i<60; i++)
+		minSelect.options[i] = new Option(i, i);
+	secondSelect = document.getElementById('addmeasurement-variable-times');
+	for(var i=0; i<60; i++)
+		secondSelect.options[i] = new Option(i, i);
+	
 	var currentTime = new Date();
-	$("#addmeasurement-variable-datetime").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate() + ' ' + currentTime.getHours() + ':00');
+	$('#addmeasurement-variable-timeh').val(currentTime.getHours());
+	$('#addmeasurement-variable-timem').val(currentTime.getMinutes());
+	$('#addmeasurement-variable-times').val(0);
+	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
 }
 
 document.addEventListener('DOMContentLoaded', function () 
