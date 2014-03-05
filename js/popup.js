@@ -225,7 +225,8 @@ var loadDateTime = function()
 	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
 	
 	hourSelect = document.getElementById('addmeasurement-variable-timeh');
-	for(var i=0; i<12; i++)
+	hourSelect.options[0] = new Option(12, 0);
+	for(var i=1; i<12; i++)
 		hourSelect.options[i] = new Option(i, i);
 	minSelect = document.getElementById('addmeasurement-variable-timem');
 	for(var i=0; i<60; i++)
@@ -235,7 +236,7 @@ var loadDateTime = function()
 	ampmSelect.options[1] = new Option("PM", 1);
 	
 	var currentTime = new Date();
-	$('#addmeasurement-variable-timeh').val(currentTime.getHours());
+	$('#addmeasurement-variable-timeh').val(currentTime.getHours() % 12);
 	$('#addmeasurement-variable-timem').val(currentTime.getMinutes());
 	$('#addmeasurement-variable-times').val(0);
 	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
