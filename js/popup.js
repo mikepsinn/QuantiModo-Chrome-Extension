@@ -1,3 +1,6 @@
+var variables = [];
+var units = [];
+
 function clearNotifications()
 {
 	var badgeParams = {text:""};
@@ -14,11 +17,16 @@ function setButtonListeners()
 var onCloseButtonClicked = function()
 {
 	window.close();
-
 }
 
-var variables = [];
-var units = [];
+var onVariableNameInputFocussed = function()
+{
+	document.getElementById('sectionMeasurementInput').style.opacity="0.2";
+};
+var onVariableNameInputUnfocussed = function()
+{
+	document.getElementById('sectionMeasurementInput').style.opacity="1";
+}
 
 var onAddButtonClicked = function()
 {
@@ -30,7 +38,6 @@ var onAddButtonClicked = function()
 	//backPage.AnalyzePage.showAddMeasurementDialog();
 	
 	// Create an array of measurements
-	
 	var name = $("#addmeasurement-variable-name").val();
 	var unit = $("#addmeasurement-variable-unit").val();
 	var value = $("#addmeasurement-variable-value").val();
@@ -67,7 +74,7 @@ var onAddButtonClicked = function()
 										{
 											measurements:			measurements,
 											name: 					name,
-											source: 				"QuantiMo.Do",
+											source: 				"QuantiModo",
 											category: 				valueCategory,
 											combinationOperation: 	combineOp,
 											unit:					unit
@@ -92,7 +99,6 @@ var onAddButtonClicked = function()
 		}
 	});
 	clearNotifications();
-	
 }
 
 var getVariableWithName = function(variableName)
@@ -118,18 +124,18 @@ var getUnitWithAbbriatedName = function(unitAbbr)
 
 var loadVariables = function()
 {
-	$.widget( "custom.catcomplete", $.ui.autocomplete, {
+	$.widget("custom.catcomplete", $.ui.autocomplete, {
 			_renderMenu: function( ul, items ) {
-			  var that = this,
-				currentCategory = "";
-			  $.each( items, function( index, item ) {
-				if ( item.category != currentCategory ) {
-				  ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
-				  currentCategory = item.category;
+					var that = this,
+					currentCategory = "";
+					$.each( items, function( index, item ) {
+						if ( item.category != currentCategory ) {
+						ul.append( "<li class='ui-autocomplete-category'>" + item.category + "</li>" );
+						currentCategory = item.category;
+						}
+						that._renderItemData( ul, item );
+					});
 				}
-				that._renderItemData( ul, item );
-			  });
-			}
 		  });
 		  
 	var request = {message: "getVariables", params: {}};
@@ -159,6 +165,8 @@ var loadVariables = function()
 		//$("#addmeasurement-variable-name").catcomplete({
 			source: varnames,
 			select: function (event, ui) {
+				document.getElementById("addmeasurement-variable-value").focus();
+				
 				var variable = getVariableWithName(ui.item.label);
 				$("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
 				if (variable == null) return;
@@ -167,7 +175,7 @@ var loadVariables = function()
 				if (variableUnit == null) return;
 				$( "#addmeasurement-variable-unitCategory").val(variableUnit.category).trigger('change');
 				$( "#addmeasurement-variable-unit").val(variableUnit.abbreviatedName);
-				
+
 			}
 		});
 	});
@@ -248,7 +256,6 @@ var loadDateTime = function()
 
 document.addEventListener('DOMContentLoaded', function () 
 {
-	
 	var wDiff = (330 - window.innerWidth);
 	var hDiff = (300 - window.innerHeight);
 	
@@ -257,5 +264,10 @@ document.addEventListener('DOMContentLoaded', function ()
 	loadVariables();
 	loadVariableUnits();
 	loadDateTime();
-	$("#addmeasurement-variable-name").focus();
+	
+	var inputField = document.getElementById("addmeasurement-variable-name");
+	inputField.onfocus=onVariableNameInputFocussed;
+	inputField.onblur=onVariableNameInputUnfocussed;
+	inputField.focus();
+	
 });

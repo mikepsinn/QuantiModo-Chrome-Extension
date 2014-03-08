@@ -98,9 +98,8 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
 });
 
 chrome.tabs.getSelected(null, function(tab){
-    chrome.tabs.executeScript(tab.id, {code: "alert('test');"}, function(response) {
-        
-    });
+    //chrome.tabs.executeScript(tab.id, {code: "alert('test');"}, function(response) {
+    //});
 });
 
 /***
@@ -110,7 +109,6 @@ chrome.tabs.getSelected(null, function(tab){
 function uploadMeasurements(measurements, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	//xhr.open("POST", "https://localhost/api/measurements/v2", true);
 	xhr.open("POST", "https://quantimo.do/api/measurements/v2", true);
 	xhr.onreadystatechange = function() 
 		{
@@ -129,7 +127,6 @@ function uploadMeasurements(measurements, onDoneListener)
 function getVariables(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	//xhr.open("POST", "https://localhost/api/measurements/v2", true);
 	xhr.open("GET", "https://quantimo.do/api/variables", true);
 	xhr.onreadystatechange = function() 
 		{
@@ -148,7 +145,6 @@ function getVariables(params, onDoneListener)
 function getVariableUnits(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	//xhr.open("POST", "https://localhost/api/measurements/v2", true);
 	xhr.open("GET", "https://quantimo.do/api/units", true);
 	xhr.onreadystatechange = function() 
 		{
