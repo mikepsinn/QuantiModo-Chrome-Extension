@@ -3,7 +3,7 @@
 
   "name": "QuantiModo",
   "description": "Track anything in seconds by just clicking the QuantiModo button in your browser!",
-  "version": "1.0",
+  "version": "1.1",
   "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "icons": {"16"	: "images/photo.png",
