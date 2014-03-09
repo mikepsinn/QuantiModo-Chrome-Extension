@@ -52,8 +52,7 @@ var onAddButtonClicked = function()
 	datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
 	datetime.setSeconds(0);
-	alert(datetime);
-	exit;
+
 	if (name == '') {
 		alert("Please enter the variable name."); return;
 	}
@@ -84,20 +83,19 @@ var onAddButtonClicked = function()
 						};
 
 	chrome.extension.sendMessage(request, function(responseText) {
+			var response = $.parseJSON(responseText);
+			if(response.success == true)
+			{
+				document.getElementById('addmeasurement-variable-value').value = "";
+				window.close();
+			}
+			else
+			{
+				alert("Adding a measurement failed.");
+				console.log(responseText);
+			}
+		});
 		
-		var response = $.parseJSON(responseText);
-		if(response.success == true)
-		{
-			alert("Added a measurement successfully.");
-			document.getElementById('addmeasurement-variable-value').value = "";
-			window.close();
-		}
-		else
-		{
-			alert("Adding a measurement failed.");
-			console.log(responseText);
-		}
-	});
 	clearNotifications();
 }
 
