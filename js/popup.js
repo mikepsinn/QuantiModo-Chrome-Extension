@@ -6,28 +6,23 @@ function clearNotifications()
 	var badgeParams = {text:""};
 	chrome.browserAction.setBadgeText(badgeParams);
 	chrome.notifications.clear("trackReportNotification", function(){});
-}
+};
 
 function setButtonListeners()
 {
 	document.getElementById('button-add').onclick=onAddButtonClicked;
 	document.getElementById('button-close').onclick=onCloseButtonClicked;
-}
+	document.getElementById('button-qm').onclick=onQmButtonClicked;
+};
 
+var onQmButtonClicked = function()
+{
+	chrome.tabs.create({ url: "https://quantimo.do/analyze" });
+};
 var onCloseButtonClicked = function()
 {
 	window.close();
-}
-
-var onVariableNameInputFocussed = function()
-{
-	document.getElementById('sectionMeasurementInput').style.opacity="0.2";
 };
-var onVariableNameInputUnfocussed = function()
-{
-	document.getElementById('sectionMeasurementInput').style.opacity="1";
-}
-
 var onAddButtonClicked = function()
 {
 	// Figure out what rating was selected
@@ -97,7 +92,16 @@ var onAddButtonClicked = function()
 		});
 		
 	clearNotifications();
-}
+};
+
+var onVariableNameInputFocussed = function()
+{
+	document.getElementById('sectionMeasurementInput').style.opacity="0.2";
+};
+var onVariableNameInputUnfocussed = function()
+{
+	document.getElementById('sectionMeasurementInput').style.opacity="1";
+};
 
 var getVariableWithName = function(variableName)
 {
@@ -107,7 +111,7 @@ var getVariableWithName = function(variableName)
 	
 	if (filteredVars.length > 0) return filteredVars[0];
 	return null;
-}
+};
 
 var getUnitWithAbbriatedName = function(unitAbbr)
 {
@@ -117,7 +121,7 @@ var getUnitWithAbbriatedName = function(unitAbbr)
 	
 	if (filteredUnits.length > 0) return filteredUnits[0];
 	return null;
-}
+};
 
 
 var loadVariables = function()
@@ -177,7 +181,7 @@ var loadVariables = function()
 			}
 		});
 	});
-}
+};
 
 var loadVariableUnits = function()
 {
@@ -218,7 +222,7 @@ var loadVariableUnits = function()
 
 		$( "#addmeasurement-variable-unitCategory").val(categories[0]).trigger('change');
 	});
-}
+};
 
 
 var loadDateTime = function()
@@ -250,7 +254,7 @@ var loadDateTime = function()
 		$('#addmeasurement-variable-timeap').val(0);
 	
 	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
-}
+};
 
 document.addEventListener('DOMContentLoaded', function () 
 {
