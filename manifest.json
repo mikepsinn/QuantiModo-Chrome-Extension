@@ -13,6 +13,7 @@
 	"alarms",
 	"notifications",
 	"storage",
+	"cookies",
     "https://quantimo.do/*"
   ],
   "browser_action": {

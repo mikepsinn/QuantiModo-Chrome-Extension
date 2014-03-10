@@ -25,13 +25,6 @@ var onCloseButtonClicked = function()
 };
 var onAddButtonClicked = function()
 {
-	// Figure out what rating was selected
-	//alert('add a measurement is clicked');
-	//var backPage = chrome.extension.getBackgroundPage();
-	//console.log(backPage);
-	
-	//backPage.AnalyzePage.showAddMeasurementDialog();
-	
 	// Create an array of measurements
 	var name = $("#addmeasurement-variable-name").val();
 	var unit = $("#addmeasurement-variable-unit").val();
@@ -258,10 +251,6 @@ var loadDateTime = function()
 
 document.addEventListener('DOMContentLoaded', function () 
 {
-	var wDiff = (330 - window.innerWidth);
-	var hDiff = (300 - window.innerHeight);
-	
-	window.resizeBy(wDiff, hDiff);
 	setButtonListeners();
 	loadVariables();
 	loadVariableUnits();
@@ -272,4 +261,12 @@ document.addEventListener('DOMContentLoaded', function ()
 	inputField.onblur=onVariableNameInputUnfocussed;
 	inputField.focus();
 	
+	var backgroundPage = chrome.extension.getBackgroundPage();
+	backgroundPage.isUserLoggedIn(function(isLoggedIn)
+	{
+		if(!isLoggedIn)
+		{
+
+		}
+	});
 });

@@ -1,4 +1,21 @@
 /***
+****	HELPER FUNCTIONS FOR FOREGROUND PROCESS
+***/
+
+/*
+**	Returns true in the result listener if the user is logged in, false if not
+*/
+function isUserLoggedIn(resultListener)
+{
+	chrome.cookies.get({url:"https://quantimo.do", name:"wordpress_logged_in_df6e405f82a01fe45903695de91ec81d"}, function(cookies)
+	{
+		console.log(cookies);
+		resultListener(cookies != null);	// sends true if the cookie isn't null
+	});
+}
+
+
+/***
 ****	EVENT HANDLERS
 ***/
 
@@ -80,16 +97,17 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
 			sendResponse(responseText);
         });
 		return true;
-	} else if(request.message == "getVariables") 
+	} 
+	else if(request.message == "getVariables") 
 	{
 		getVariables(request.params, function (responseText) {
 			sendResponse(responseText);
         });
 		return true;
-	} else if(request.message == "getVariableUnits") 
+	} 
+	else if(request.message == "getVariableUnits") 
 	{
 		getVariableUnits(request.params, function (responseText) {
-
 			sendResponse(responseText);
         });
 		return true;
