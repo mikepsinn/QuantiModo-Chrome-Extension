@@ -7,10 +7,21 @@ function loadAccountDetails()
 			if (xhr.readyState == 4) 
 			{
 				var userObject = JSON.parse(xhr.responseText);
+				/*
+				 * it should hide and show sign in button based upon the cookie set or not
+				 */
 				if(typeof userObject['displayName'] !== "undefined")
 				{
+					document.getElementById('accountNameSpanHide').style.display="none";
 					var accountNameSpan = document.getElementById('accountNameSpan');
 					accountNameSpan.innerText = userObject['displayName'];
+					
+				} else {
+
+					document.getElementById('accountNameSpan').style.display="none";
+					document.getElementById('accountNameSpanHide').style.display="display";
+					
+
 				}
 			}
 		};

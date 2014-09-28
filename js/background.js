@@ -5,14 +5,8 @@
 /*
 **	Returns true in the result listener if the user is logged in, false if not
 */
-
- var ID;
-
-   
-
 function isUserLoggedIn(resultListener)
 {
-	
 	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
 	  function (cookie) {
 		if (cookie) {
@@ -23,7 +17,6 @@ function isUserLoggedIn(resultListener)
 			chrome.tabs.create({"url":url, "selected":true});
 		}
 	});
-
 }
 
 
