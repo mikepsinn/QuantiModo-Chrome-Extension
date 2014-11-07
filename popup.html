@@ -20,8 +20,159 @@
 	
   </head>
   <body>
-	<div class="addmeasurement-content" id="addmeasurement-dialog-content">
 	
+	<div class="addmeasurement-content" id="addmeasurement-dialog-content">
+		
+
+		<div id="signup_block">
+			<div id="login"	>
+			<center>
+			<a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Crowdsourcing Wellness" height=50></a>
+			
+			<h4>
+			At QuantiModo, this data can be combined with weather, activity, diet, sleep, medication and other data to identify what factors most affect your health and happiness</h4>
+
+			
+			<a href="https://quantimo.do/tools" onclick="_gaq.push(['_trackEvent', 'outbound-article-int', 'https://quantimo.do/tools', '']);" sl-processed="1"><img alt="Timeline Graph" src="https://i.imgur.com/AwhxdGP.png" width=270></a>
+
+			</center>
+
+			</div>
+
+
+			<div class="wp-social-login-widget">
+
+				<div id="wp-social-login-connect-options" class="wp-social-login-provider-list">
+				<center>
+					
+					<button id="button_quantimo_facebook_sign_in" style="background:blue;">
+						<div class="width_220" >
+						<div style="float:left;"><img alt="Facebook" title="Connect with Facebook" src="https://quantimo.do/wp-content/plugins/wordpress-social-login/assets/img/32x32/wpzoom/facebook.png"></div> <div class="face_goog_txt"> Sign in with Facebook </div>	
+						</div>
+					</button> <br /><br />
+
+
+					<button id="button_quantimo_google_sign_in">
+						<div class="width_220">
+						<div style="float:left;"><img alt="Google" title="Connect with Google" src="https://quantimo.do/wp-content/plugins/wordpress-social-login/assets/img/32x32/wpzoom/google.png">	</div><div class="face_goog_txt"> Sign in with Facebook </div>
+						</div>
+					</button>
+
+					<br /> <br /> 
+					<button id="button_quantimo_sign_in"> <div class="div_login">Log In </div></button>
+					
+					</center>
+					<div class="div_register">
+					<a id="anhor-register" href="#"> <h4>Register</h4> </a>
+					</div>
+
+					
+
+				</div> 
+
+			</div>
+
+		</div>
+
+		<div id="record_a_measurement_block">
+			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-top:20px;"><a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Crowdsourcing Wellness" height=20></a></div>
+			<input type="text" placeholder="Variable name" id="addmeasurement-variable-name">
+			<br />
+			<br />
+			<br />
+			<br />
+			<center>
+				<div><button id="button-record-a-measurement" class="new_button">Record a Measurement</button></div>
+				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister"><img src="images/gtk-about.png" alt="Crowdsourcing Wellness" height=30></a></div>
+			</center>
+
+		</div>
+
+
+		<div id="edt_record_a_measurement_block">
+			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-top:20px;"><a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Crowdsourcing Wellness" height=20></a></div>
+
+			<input type="text" placeholder="Variable name" id="edt-addmeasurement-variable-name" style="width:96%; padding:5px;">
+			
+			<div class="sectionTitle">
+				<b>Enter Your Measurement</b>
+			</div>
+
+			<table class="inputContainer">
+				<tr>
+					<td><input id="addmeasurement-variable-value" type="text" placeholder="Value" style="width: 20%;"><select id="addmeasurement-variable-unitCategory" style="margin-left: 2%; width: 35%;"></select><select id="addmeasurement-variable-unit" style="margin-left: 2%; width: 40%;"></select></td>
+				</tr>
+				<tr>
+					<td>
+						<select id="addmeasurement-variable-timeh" style="width: 18%;"></select>:
+						<select id="addmeasurement-variable-timem" style="width: 18%;"></select>
+						<select id="addmeasurement-variable-timeap" style="width: 20%;"></select>
+						<input id="addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%; width: 35%;">
+					</td>
+				</tr>
+			</table>
+
+			<center>
+				<div><button id="button-edit-record-a-measurement" class="new_button">Submit</button></div>
+				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_1"><img src="images/gtk-about.png" alt="Crowdsourcing Wellness" height=30></a></div>
+			</center>
+			
+		</div>
+
+		<div id="add_record_a_measurement_block">
+			<div style="float:left;"><h2>Create a New Variable</h2></div><div style="float:right; margin-top:20px;"><a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Crowdsourcing Wellness" height=20></a></div>
+
+			
+			<input type="text" placeholder="Variable name" id="add-addmeasurement-variable-name" style="width:96%; padding:5px;">
+
+			<div class="sectionTitle">
+				<b>Enter Your Measurement</b>
+			</div>
+
+			<table class="inputContainer">
+				<tr>
+					<td><input id="add-addmeasurement-variable-value" type="text" placeholder="Value" style="width: 20%;"><select id="add-addmeasurement-variable-unitCategory" style="margin-left: 2%; width: 35%;"></select><select id="add-addmeasurement-variable-unit" style="margin-left: 2%; width: 40%;"></select></td>
+				</tr>
+				<tr>
+					<td>
+						<select id="add-addmeasurement-variable-timeh" style="width: 18%;"></select>:
+						<select id="add-addmeasurement-variable-timem" style="width: 18%;"></select>
+						<select id="add-addmeasurement-variable-timeap" style="width: 20%;"></select>
+						<input id="add-addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%; width: 35%;">
+					</td>
+				</tr>
+			</table>
+			<div class="sectionTitle">
+				<b>Variable Settings</b>
+			</div>
+			<table class="inputContainer">
+				<tr>
+					<td>Category</td>
+				</tr>
+				<tr>
+					<td><select id="addmeasurement-variable-category"></select></td>
+				</tr>
+				<tr>
+					<td>Combination Operation</td>
+				</tr>
+				<tr>
+					<td>
+						<input type="radio" name="combineOperation" value="SUM" checked><label>Sum</label><br>
+						<input type="radio" name="combineOperation" value="MEAN"><label>Average</label><br>
+					</td>
+				</tr>
+
+			</table>
+
+			<center>
+				<div><button id="button-add-record-a-measurement" class="new_button">Create Variable & Submit Measurement</button></div>
+				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_2"><img src="images/gtk-about.png" alt="Crowdsourcing Wellness" height=30></a></div>
+			</center>
+
+		</div>
+
+
+		<!-- 
 		<input type="text" placeholder="Variable name" id="addmeasurement-variable-name">
 		
 		<section id="sectionMeasurementInput">
@@ -68,6 +219,7 @@
 			<button id="button-close"><img src="images/cancel.png"></img></button>
 			<button id="button-qm"><img src="images/photo.png"></img></button>
 		</section>
+		-->
 	</div>
   </body>
 </html>

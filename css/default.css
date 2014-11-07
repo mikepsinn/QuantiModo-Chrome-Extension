@@ -1,5 +1,5 @@
 body{
-	width: 290px;
+	width: 400px;
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -172,4 +172,72 @@ button: hover{
 }
 .xdsoft_datetimepicker {
 	z-index:1200000 !important;
+}
+
+div#login h1 a {
+	background-image: url(https://quantimo.do/wp-content/uploads/2013/10/QM-LOGO-CRAZY-ARROWS-blue-1614-x-400-abolish.png);
+	padding-bottom: 30px;
+	background-size: 280px 80px !important;
+	width: auto;
+	padding-bottom: 0px;
+	color: #999;
+	height: 80px;
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1.3em;
+	padding: 0;
+	text-decoration: none;
+	width: 80px;
+	text-indent: -9999px;
+	outline: 0;
+	overflow: hidden;
+	display: block;
+	repeat:no
+
+	
+}
+
+div#login h4 {
+text-align:center; padding:0px; line-height:16px;
+}
+
+.width_220 {
+	width:220px;
+}
+
+.div_register {
+float:left; margin-left:30px; margin-top:0px;
+}
+
+.div_login {
+width:220px;padding-top: 10px; padding-bottom: 10px; font-weight: bold;
+}
+
+.face_goog_txt{
+width: 180px; margin-top: 6px; font-weight: bold;
+}
+
+
+
+.new_button {
+background-image: none;
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+-ms-border-radius: 3px;
+-o-border-radius: 3px;
+border-radius: 3px;
+text-shadow: none;
+-webkit-transition: background-color 0.2s;
+-moz-transition: background-color 0.2s;
+-o-transition: background-color 0.2s;
+transition: background-color 0.2s;
+background-color: #FFFFFF;
+border: none;
+color: black !important;
+line-height: 20px;
+padding: 6px 40px;
+text-align: center;
+font-size: 1em;
+font-weight:bold;
+border:2px solid #d0d0d0;
 }
