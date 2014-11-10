@@ -73,7 +73,7 @@ body{
 #addmeasurement-dialog-content td:first-child{
 	white-space: nowrap;
 }
-	
+/*	
 button {
 	-webkit-box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
 	-moz-box-shadow: inset 0 -1px 1px rgba(0, 0, 0, 0.3);
@@ -97,11 +97,12 @@ button {
 	text-align: center;
 	font-size: 1em;
 }
+
 	
 button: hover{
 	background-color: #19adaa;
 }
-
+*/
 
 #button-qm {
 	margin: auto;
@@ -240,4 +241,133 @@ text-align: center;
 font-size: 1em;
 font-weight:bold;
 border:2px solid #d0d0d0;
+}
+
+
+
+/*//////////////////// new */
+
+.form-window div.container {
+width: 220px;
+margin: 0 auto;
+}
+
+
+.register-window #logo {
+float: left;
+margin: 22px 0 23px 0;
+}
+
+
+.register-window h1 {
+clear: left;
+color: #009dc8;
+font-size: 52.5px;
+margin-bottom: 7px;
+}
+
+.form-window h1 {
+font-family: PFDinDisplayPro;
+font-weight: 200;
+color: #00bbe8;
+text-align: left;
+margin: 20px auto;
+width: 100%;
+}
+
+.register-window .intro {
+margin-left: 1px;
+font-size: 15.5px;
+line-height: 22px;
+color: #6b6b6b;
+}
+
+.form-window p {
+width: 100%;
+text-align: left;
+margin: 0 auto;
+}
+
+.register-window .google-connect, .register-window .fb-connect {
+display: inline-block;
+position: relative;
+height: 49px;
+}
+
+
+.register-window .alreadybutton {
+background: url("../images/anydo-connect.png") 0 0 no-repeat;
+font-size: 15px;
+font-family: arial, sans-serif;
+font-weight: bold;
+color: #4199cc;
+width: 226px;
+height: 58px;
+line-height: 50px;
+display: block;
+padding-left: 100px;
+}
+
+.register-window .already {
+margin: 0;
+}
+
+
+.form-window .already {
+margin-top: 20px;
+cursor: pointer;
+}
+
+.register-window .register {
+float: left;
+}
+
+.register-window .register, .register-window .skip {
+color: #a8a8a8;
+font-size: 15px;
+cursor: pointer;
+margin: 7px 0;
+}
+
+
+.form-window button, .form-window .button, .form-window input[type=submit] {
+display: block;
+line-height: 50px;
+cursor: pointer;
+-webkit-appearance: none;
+width: 100%;
+height: 50px;
+border-radius: 10px;
+font-size: 20px;
+font-weight: 200;
+border: 1px solid #CCC;
+color: #333;
+border-image: initial;
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #eeeeee));
+background-image: -webkit-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: -moz-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: -ms-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: -o-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+}
+
+button, .button, input[type=submit] {
+display: block;
+line-height: 40px;
+cursor: pointer;
+-webkit-appearance: none;
+width: 80%;
+height: 40px;
+border-radius: 10px;
+font-size: 20px;
+font-weight: 200;
+border: 1px solid #CCC;
+color: #333;
+border-image: initial;
+background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fafafa), color-stop(100%, #eeeeee));
+background-image: -webkit-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: -moz-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: -ms-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: -o-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
+background-image: linear-gradient(top, #fafafa 0%, #eeeeee 100%);
 }

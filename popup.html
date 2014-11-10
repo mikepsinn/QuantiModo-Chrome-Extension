@@ -25,53 +25,21 @@
 		
 
 		<div id="signup_block">
-			<div id="login"	>
-			<center>
-			<a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=50></a>
 			
-			<h4>
-			At QuantiModo, this data can be combined with weather, activity, diet, sleep, medication and other data to identify what factors most affect your health and happiness</h4>
-
-			
-			<a href="https://quantimo.do/tools" onclick="_gaq.push(['_trackEvent', 'outbound-article-int', 'https://quantimo.do/tools', '']);" sl-processed="1"><img alt="Timeline Graph" src="https://i.imgur.com/AwhxdGP.png" width=270></a>
-
-			</center>
-
+			<div class="window form-window visible">
+				<div class="container register-window">
+					<img id="logo" src="images/logo-full.png" alt="Better living through data." height=50> <br clear="left" />
+					<p class="intro">At QuantiModo, this data can be combined with weather, activity, diet, sleep, medication and other data to identify what factors most affect your health and happiness</p>
+					<p><img id="sync-image" src="images/sync-image.png"></p>
+					<a class="fb-connect" id="button_quantimo_facebook_sign_in" ><img src="images/facebook-connect.png"></a>
+					<a class="google-connect" id="button_quantimo_google_sign_in"><img src="images/google-connect.png"></a>
+					<a class="already alreadybutton" id="button_quantimo_sign_in">Log in</a>
+					<div class="register" id="anhor-register">Register</div>
+					<!-- not ready yet <div class="skip">Skip</div>-->
+				</div>
 			</div>
 
-
-			<div class="wp-social-login-widget">
-
-				<div id="wp-social-login-connect-options" class="wp-social-login-provider-list">
-				<center>
-					
-					<button id="button_quantimo_facebook_sign_in" style="background:#3b5998;">
-						<div class="width_220" >
-						<div style="float:left;"><img alt="Facebook" title="Connect with Facebook" src="https://quantimo.do/wp-content/plugins/wordpress-social-login/assets/img/32x32/wpzoom/facebook.png"></div> <div class="face_goog_txt"> Sign in with Facebook </div>	
-						</div>
-					</button> <br /><br />
-
-
-					<button id="button_quantimo_google_sign_in" style="background:#F90101;">
-						<div class="width_220">
-						<div style="float:left;"><img alt="Google" title="Connect with Google" src="https://quantimo.do/wp-content/plugins/wordpress-social-login/assets/img/32x32/wpzoom/google.png">	</div><div class="face_goog_txt"> Sign in with Google </div>
-						</div>
-					</button>
-
-					<br /> <br /> 
-					<button id="button_quantimo_sign_in"> <div class="width_220">
-						<div style="float:left;"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Crowdsourcing Wellness" height="50"><div class="div_login">Log in with your QM account</div></button>
-					
-					</center>
-					<div class="div_register">
-					<a id="anhor-register" href="#"> <h4>Register</h4> </a>
-					</div>
-
-					
-
-				</div> 
-
-			</div>
+			
 
 		</div>
 
@@ -83,7 +51,7 @@
 			<br />
 			<br />
 			<center>
-				<div><button id="button-record-a-measurement" class="new_button">Record a Measurement</button></div>
+				<div><button id="button-record-a-measurement" class="button login">Record a Measurement</button></div>
 				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister"><img src="images/gtk-about.png" alt="Better living through data." height=30></a></div>
 			</center>
 
@@ -114,7 +82,7 @@
 			</table>
 
 			<center>
-				<div><button id="button-edit-record-a-measurement" class="new_button">Submit</button></div>
+				<div><button id="button-edit-record-a-measurement" class="button login">Submit</button></div>
 				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_1"><img src="images/gtk-about.png" alt="Better living through data." height=30></a></div>
 			</center>
 			
@@ -166,7 +134,7 @@
 			</table>
 
 			<center>
-				<div><button id="button-add-record-a-measurement" class="new_button">Create Variable & Submit Measurement</button></div>
+				<div><button id="button-add-record-a-measurement" class="button login">Create Variable & Submit Measurement</button></div>
 				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_2"><img src="images/gtk-about.png" alt="Better living through data." height=30></a></div>
 			</center>
 
