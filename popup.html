@@ -16,7 +16,7 @@
 	<link rel="stylesheet" id="jquery-autocomplete-css" href="css/jquery-ui-1.10.4.custom.css" type="text/css" media="all">
 	<link rel="stylesheet" id="default" href="css/default.css" type="text/css" media="all">
 	
-	<!--<link rel="stylesheet" id="jquery-datetimepicker-css" href="http://localhost/wp-content/themes/Metrolium-qm/css/jquery.datetimepicker.css?ver=3.8" type="text/css" media="all">-->
+	<link rel="stylesheet" id="jquery-datetimepicker-css" href="css/jquery.datetimepicker.css?ver=3.8" type="text/css" media="all">
 	
   </head>
   <body>
@@ -28,9 +28,10 @@
 			
 			<div class="window form-window visible">
 				<div class="container register-window">
-					<img id="logo" src="images/logo-full.png" alt="Better living through data." height=50> <br clear="left" />
-					<p class="intro">At QuantiModo, this data can be combined with weather, activity, diet, sleep, medication and other data to identify what factors most affect your health and happiness</p>
-					<p><img id="sync-image" src="images/sync-image.png"></p>
+					<img id="logo" src="images/logo-full-1.png" alt="Better living through data."> <br clear="left" />
+					<!-- <p class="intro">At QuantiModo, this data can be combined with weather, activity, diet, sleep, medication and other data to identify what factors most affect your health and happiness</p>
+					-->
+					<img id="sync-image" src="images/sync-image-1.png"> <br clear="left" />
 					<a class="fb-connect" id="button_quantimo_facebook_sign_in" ><img src="images/facebook-connect.png"></a>
 					<a class="google-connect" id="button_quantimo_google_sign_in"><img src="images/google-connect.png"></a>
 					<a class="already alreadybutton" id="button_quantimo_sign_in">Log in</a>
@@ -44,8 +45,14 @@
 		</div>
 
 		<div id="record_a_measurement_block">
-			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-top:20px;"><a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=20></a></div>
+			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-top:20px;"><a href="#" title="QuantiModo" id="logo-correlate"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=20></a></div>
 			<input type="text" placeholder="Variable name" id="addmeasurement-variable-name">
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
 			<br />
 			<br />
 			<br />
@@ -59,7 +66,7 @@
 
 
 		<div id="edt_record_a_measurement_block">
-			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-top:20px;"><a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=20></a></div>
+			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-top:20px;"><a href="#" title="QuantiModo" id="logo-correlate-1"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=20></a></div>
 
 			<input type="text" placeholder="Variable name" id="edt-addmeasurement-variable-name" style="width:96%; padding:5px;">
 			
@@ -73,9 +80,9 @@
 				</tr>
 				<tr>
 					<td>
-						<select id="addmeasurement-variable-timeh" style="width: 18%;"></select>:
+						<!-- <select id="addmeasurement-variable-timeh" style="width: 18%;"></select>:
 						<select id="addmeasurement-variable-timem" style="width: 18%;"></select>
-						<select id="addmeasurement-variable-timeap" style="width: 20%;"></select>
+						<select id="addmeasurement-variable-timeap" style="width: 20%;"></select> -->
 						<input id="addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%; width: 35%;">
 					</td>
 				</tr>
@@ -89,7 +96,7 @@
 		</div>
 
 		<div id="add_record_a_measurement_block">
-			<div style="float:left;"><h2>Create a New Variable</h2></div><div style="float:right; margin-top:20px;"><a href="https://quantimo.do" title="QuantiModo"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=20></a></div>
+			<div style="float:left;"><h2>Create a New Variable</h2></div><div style="float:right; margin-top:20px;"><a href="#" title="QuantiModo" id="logo-correlate-2"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." height=20></a></div>
 
 			
 			<input type="text" placeholder="Variable name" id="add-addmeasurement-variable-name" style="width:96%; padding:5px;">
@@ -104,9 +111,9 @@
 				</tr>
 				<tr>
 					<td>
-						<select id="add-addmeasurement-variable-timeh" style="width: 18%;"></select>:
+						<!-- <select id="add-addmeasurement-variable-timeh" style="width: 18%;"></select>:
 						<select id="add-addmeasurement-variable-timem" style="width: 18%;"></select>
-						<select id="add-addmeasurement-variable-timeap" style="width: 20%;"></select>
+						<select id="add-addmeasurement-variable-timeap" style="width: 20%;"></select> -->
 						<input id="add-addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%; width: 35%;">
 					</td>
 				</tr>
@@ -141,55 +148,9 @@
 		</div>
 
 
-		<!-- 
-		<input type="text" placeholder="Variable name" id="addmeasurement-variable-name">
 		
-		<section id="sectionMeasurementInput">
-			<div class="sectionTitle">
-				<b>Measurement</b>
-			</div>
-			<table class="inputContainer">
-				<tr>
-					<td><input id="addmeasurement-variable-value" type="text" placeholder="Value" style="width: 20%;"><select id="addmeasurement-variable-unitCategory" style="margin-left: 2%; width: 35%;"></select><select id="addmeasurement-variable-unit" style="margin-left: 2%; width: 40%;"></select></td>
-				</tr>
-				<tr>
-					<td>
-						<select id="addmeasurement-variable-timeh" style="width: 18%;"></select>:
-						<select id="addmeasurement-variable-timem" style="width: 18%;"></select>
-						<select id="addmeasurement-variable-timeap" style="width: 20%;"></select>
-						<input id="addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%; width: 35%;">
-					</td>
-				</tr>
-			</table>
-			
-			<div class="sectionTitle">
-				<b>Variable settings</b>
-			</div>
-			<table class="inputContainer">
-				<tr>
-					<td>Category</td>
-				</tr>
-				<tr>
-					<td><select id="addmeasurement-variable-category"></select></td>
-				</tr>
-				<tr>
-					<td>Combination Operation</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="radio" name="combineOperation" value="SUM" checked><label>Sum</label><br>
-						<input type="radio" name="combineOperation" value="MEAN"><label>Average</label><br>
-					</td>
-				</tr>
-
-			</table>
-			
-			<button id="button-add">Add</button>
-			<button id="button-close"><img src="images/cancel.png"></img></button>
-			<button id="button-qm"><img src="images/photo.png"></img></button>
-		</section>
-		-->
 	</div>
+	<script src="js/jquery.datetimepicker.js"></script>
   </body>
 </html>
 

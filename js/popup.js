@@ -48,9 +48,20 @@ function setButtonListeners()
 	document.getElementById('button-edit-record-a-measurement').onclick = onEdtButtonClicked;
 	document.getElementById('button-add-record-a-measurement').onclick = onAddButtonClicked;
 	document.getElementById('anhor-register').onclick = onRegisterAClicked;
+	
 	document.getElementById('btnQuantiModoRegister').onclick = btnQuantiModoRegisterClick;
+
 	document.getElementById('btnQuantiModoRegister_1').onclick = btnQuantiModoRegisterClick;
 	document.getElementById('btnQuantiModoRegister_2').onclick = btnQuantiModoRegisterClick;
+
+	document.getElementById('logo-correlate').onclick = btnQuantiModoLogoCorrelateClick;
+	document.getElementById('logo-correlate-1').onclick = btnQuantiModoLogoCorrelateClick;
+	document.getElementById('logo-correlate-2').onclick = btnQuantiModoLogoCorrelateClick;
+
+	//var optionsUrl = chrome.extension.getURL("src/options/options.html"); 
+	//var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
+
+
 		
 };
 
@@ -89,7 +100,17 @@ var onQmRcdMstButtonClicked = function()
 // registration button clicked
 var btnQuantiModoRegisterClick = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/analyze/" });
+	var optionsUrl = chrome.extension.getURL("options/options.html"); 
+	//var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
+
+	chrome.tabs.create({ url: optionsUrl });
+};
+
+
+// registration button clicked
+var btnQuantiModoLogoCorrelateClick = function()
+{
+	chrome.tabs.create({ url: "https://quantimo.do/correlate/" });
 };
 
 
@@ -447,13 +468,43 @@ var loadAddVariableUnits = function()
 
 var loadDateTime = function()
 {
+	/*
 	$("#addmeasurement-variable-date").datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
+
+
+
+
 	$("#addmeasurement-variable-date").datepicker("setDate", new Date());
 	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
+
+	*/
+
+	$('#addmeasurement-variable-date').datetimepicker({
+	dayOfWeekStart : 1,
+	lang:'en',
+	startDate:	'1986/01/05'
+	});
 	
+
+	var currentTime = new Date();
+
+	var j_years = currentTime.getFullYear();
+	var j_months = currentTime.getMonth();
+	var j_date = currentTime.getDate();
+
+	var j_hours = currentTime.getHours();
+	var j_minutes = currentTime.getMinutes();
+
+	var c_date = j_years+"/"+j_months+"/"+j_date;
+
+	var c_date_time = c_date + " " + j_hours + ":" + j_minutes;
+
+	$('#addmeasurement-variable-date').datetimepicker({value: c_date_time,step:10});
+
+	/*
 	hourSelect = document.getElementById('addmeasurement-variable-timeh');
 	hourSelect.options[0] = new Option(12, 0);
 	for(var i=1; i<12; i++)
@@ -472,6 +523,7 @@ var loadDateTime = function()
 		$('#addmeasurement-variable-timeap').val(1);
 	else
 		$('#addmeasurement-variable-timeap').val(0);
+	*/
 	
 	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
 };
@@ -479,13 +531,37 @@ var loadDateTime = function()
 // Load Date Time 
 var loadAddDateTime = function()
 {
+	/*
 	$("#add-addmeasurement-variable-date").datepicker({
       showOtherMonths: true,
       selectOtherMonths: true
     });
 	$("#add-addmeasurement-variable-date").datepicker("setDate", new Date());
 	$("#add-addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
+	*/
+	$('#add-addmeasurement-variable-date').datetimepicker({
+	dayOfWeekStart : 1,
+	lang:'en',
+	startDate:	'1986/01/05'
+	});
+
+	var currentTime = new Date();
+
+	var j_years = currentTime.getFullYear();
+	var j_months = currentTime.getMonth();
+	var j_date = currentTime.getDate();
+
+	var j_hours = currentTime.getHours();
+	var j_minutes = currentTime.getMinutes();
+
+	var c_date = j_years+"/"+j_months+"/"+j_date;
+
+	var c_date_time = c_date + " " + j_hours + ":" + j_minutes;
+
+	$('#add-addmeasurement-variable-date').datetimepicker({value: c_date_time, step:10});
+
 	
+	/*
 	hourSelect = document.getElementById('add-addmeasurement-variable-timeh');
 	hourSelect.options[0] = new Option(12, 0);
 	for(var i=1; i<12; i++)
@@ -504,6 +580,7 @@ var loadAddDateTime = function()
 		$('#add-addmeasurement-variable-timeap').val(1);
 	else
 		$('#add-addmeasurement-variable-timeap').val(0);
+	*/
 	
 	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
 };
