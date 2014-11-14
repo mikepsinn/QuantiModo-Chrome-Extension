@@ -167,9 +167,14 @@ var onEdtButtonClicked = function()
 	var min = $('#addmeasurement-variable-timem').val();
 	var ap = $('#addmeasurement-variable-timeap').val();
 	var datetime = new Date(datetimeString);
-	datetime.setHours(parseInt(hour) + (ap * 12));
+	
+	/*
+	alert (datetime) ; 
+	alert (Math.floor(datetime.getTime()  / 1000));
+	/*datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
 	datetime.setSeconds(0);
+	*/
 
 	if (name == '') {
 		alert("Please enter the variable name."); return;
@@ -224,7 +229,6 @@ var onEdtButtonClicked = function()
 };
 
 
-
 var onAddButtonClicked = function()
 {
 	// Create an array of measurements
@@ -239,9 +243,12 @@ var onAddButtonClicked = function()
 	var min = $('#add-addmeasurement-variable-timem').val();
 	var ap = $('#add-addmeasurement-variable-timeap').val();
 	var datetime = new Date(datetimeString);
+
+	/*
 	datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
 	datetime.setSeconds(0);
+	*/
 
 	if (name == '') {
 		alert("Please enter the variable name."); return;
