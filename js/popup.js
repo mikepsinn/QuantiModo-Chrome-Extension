@@ -389,85 +389,43 @@ var loadVariables = function()
 
 var loadVariableUnits = function()
 {
-	$( "#addmeasurement-variable-unitCategory" ).change(function() {
-		
-		var filteredUnits = jQuery.grep(units, function (unit, i) {
-			return unit.category == $( "#addmeasurement-variable-unitCategory" ).val();
-		});
-		$( "#addmeasurement-variable-unit option").remove();
-		unitSelect = document.getElementById('addmeasurement-variable-unit');
-		//unitSelect.options = [];
-		$.each(filteredUnits.sort(function(a, b)
-		{
-			return a.name.localeCompare(b.name);
-		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-		});
-	});
-
+	
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('addmeasurement-variable-unit');
-		unitCategorySelect = document.getElementById('addmeasurement-variable-unitCategory');
 		units = $.parseJSON(responseText);
-		var categories = [];
+	
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			//unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-			if ($.inArray(unit.category, categories)==-1) {
-				categories.push(unit.category);
-			}
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
+			
 		});
-		categories.sort();
-		for(var i=0; i<categories.length; i++)
-			unitCategorySelect.options[unitCategorySelect.options.length] = new Option(categories[i], categories[i]);
 
-		$( "#addmeasurement-variable-unitCategory").val(categories[0]).trigger('change');
 	});
+
 };
 
 // Load option for the Distance
 
 var loadAddVariableUnits = function()
 {
-	$( "#add-addmeasurement-variable-unitCategory" ).change(function() {
-		
-		var filteredUnits = jQuery.grep(units, function (unit, i) {
-			return unit.category == $( "#add-addmeasurement-variable-unitCategory" ).val();
-		});
-		$( "#add-addmeasurement-variable-unit option").remove();
-		unitSelect = document.getElementById('add-addmeasurement-variable-unit');
-		//unitSelect.options = [];
-		$.each(filteredUnits.sort(function(a, b)
-		{
-			return a.name.localeCompare(b.name);
-		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-		});
-	});
+	
 
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('add-addmeasurement-variable-unit');
-		unitCategorySelect = document.getElementById('add-addmeasurement-variable-unitCategory');
 		units = $.parseJSON(responseText);
-		var categories = [];
+		
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			//unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-			if ($.inArray(unit.category, categories)==-1) {
-				categories.push(unit.category);
-			}
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
+				
 		});
-		categories.sort();
-		for(var i=0; i<categories.length; i++)
-			unitCategorySelect.options[unitCategorySelect.options.length] = new Option(categories[i], categories[i]);
 
-		$( "#add-addmeasurement-variable-unitCategory").val(categories[0]).trigger('change');
 	});
 };
 
@@ -550,6 +508,7 @@ var loadAddDateTime = function()
 	dayOfWeekStart : 1,
 	lang:'en',
 	startDate:	'1986/01/05'
+	
 	});
 
 	var currentTime = new Date();
@@ -610,27 +569,5 @@ document.addEventListener('DOMContentLoaded', function ()
 	inputField.onblur = onVariableNameInputUnfocussed;
 	inputField.focus();
 	
-	/*
-	var backgroundPage = chrome.extension.getBackgroundPage();
-	backgroundPage.isUserLoggedIn(function(isLoggedIn)
-	{
-		if(!isLoggedIn)
-		{
-
-		}
-	});
-	*/
-	/*
-	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
-	  function (cookie) {
-		if (cookie) {
-		  console.log(cookie.value); // print
-		}
-		else {
-			var url = "https://quantimo.do/analyze";
-			chrome.tabs.create({"url":url, "selected":true});
-		}
-	});
-	*/
 
 });
