@@ -160,7 +160,7 @@ var onEdtButtonClicked = function()
 	var unit = $("#addmeasurement-variable-unit").val();
 	var value = $("#addmeasurement-variable-value").val();
 	var valueCategory = $("#addmeasurement-variable-category").val();
-	var combineOp = $("input:radio[name ='combineOperation']:checked").val();
+	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#addmeasurement-variable-date").val();
 	
 	var hour = $('#addmeasurement-variable-timeh').val();
@@ -236,7 +236,7 @@ var onAddButtonClicked = function()
 	var unit = $("#add-addmeasurement-variable-unit").val();
 	var value = $("#add-addmeasurement-variable-value").val();
 	var valueCategory = $("#addmeasurement-variable-category").val();
-	var combineOp = $("input:radio[name ='combineOperation']:checked").val();
+	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#add-addmeasurement-variable-date").val();
 	
 	var hour = $('#add-addmeasurement-variable-timeh').val();
@@ -278,7 +278,6 @@ var onAddButtonClicked = function()
 									]
 									
 						};
-
 	chrome.extension.sendMessage(request, function(responseText) {
 			var response = $.parseJSON(responseText);
 			if(response.success == true)
