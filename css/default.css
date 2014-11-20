@@ -165,7 +165,7 @@ button: hover{
 	position: absolute; 
 	cursor: default;
 	z-index:1200000 !important;
-	height:30px !important;
+	height:37px !important;
 	overflow-y: scroll;
 
 } 
@@ -259,7 +259,7 @@ margin: 0 auto;
 
 .register-window #logo {
 float: left;
-margin: 22px 0 0px 0;
+margin: 0px 0 0px -26px;
 }
 
 

@@ -22,8 +22,10 @@ function setBlockHideShow()
 	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
 	  function (cookie) {
 		if (cookie) {
+			$('body').css('width', '400px');
 			$("#record_a_measurement_block").show();
 		} else {
+			$('body').css('width', '270px');
 			$("#signup_block").show();
 		}
 	});
