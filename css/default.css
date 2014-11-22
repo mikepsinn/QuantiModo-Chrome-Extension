@@ -1,5 +1,5 @@
 body{
-	width: 400px;
+	width: 360px;
 	margin: 0;
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -165,8 +165,6 @@ button: hover{
 	position: absolute; 
 	cursor: default;
 	z-index:1200000 !important;
-	height:37px !important;
-	overflow-y: scroll;
 
 } 
 .ui-autocomplete-category {

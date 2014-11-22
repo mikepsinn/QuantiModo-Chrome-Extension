@@ -12,8 +12,6 @@ function clearNotifications()
 
 function setBlockHideShow() 
 {
-	
-
 	$("#signup_block").hide();
 	$("#record_a_measurement_block").hide();
 	$("#edt_record_a_measurement_block").hide();
@@ -22,7 +20,7 @@ function setBlockHideShow()
 	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
 	  function (cookie) {
 		if (cookie) {
-			$('body').css('width', '400px');
+			$('body').css('width', '360px');
 			$("#record_a_measurement_block").show();
 		} else {
 			$('body').css('width', '270px');
@@ -300,10 +298,12 @@ var onAddButtonClicked = function()
 
 var onVariableNameInputFocussed = function()
 {
+		$("#snd_gap").height('100px');
 	//document.getElementById('sectionMeasurementInput').style.opacity="0.2";
 };
 var onVariableNameInputUnfocussed = function()
 {
+	$("#snd_gap").height('10px');
 	//document.getElementById('sectionMeasurementInput').style.opacity="1";
 };
 
@@ -341,10 +341,12 @@ var loadVariables = function()
 						}
 						that._renderItemData( ul, item );
 					});
+					
 				}
 		  });
 		  
 	var request = {message: "getVariables", params: {}};
+
 	chrome.extension.sendMessage(request, function(responseText) {
 		//unitSelect = document.getElementById('addmeasurement-variable-name');
 		variables = $.parseJSON(responseText);
@@ -371,6 +373,7 @@ var loadVariables = function()
 		//$("#addmeasurement-variable-name").catcomplete({
 			source: varnames,
 			select: function (event, ui) {
+				
 				document.getElementById("addmeasurement-variable-value").focus();
 				var variable = getVariableWithName(ui.item.label);
 				$("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
@@ -434,24 +437,12 @@ var loadAddVariableUnits = function()
 
 var loadDateTime = function()
 {
-	/*
-	$("#addmeasurement-variable-date").datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true
-    });
-
-
-
-
-	$("#addmeasurement-variable-date").datepicker("setDate", new Date());
-	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
-
-	*/
 
 	$('#addmeasurement-variable-date').datetimepicker({
 	dayOfWeekStart : 1,
 	lang:'en',
-	startDate:	'1986/01/05'
+	startDate:	'1986/01/05',
+	format: 'h:i a m/d/Y'
 	});
 	
 
@@ -464,52 +455,26 @@ var loadDateTime = function()
 	var j_hours = currentTime.getHours();
 	var j_minutes = currentTime.getMinutes();
 
-	var c_date = j_years+"/"+j_months+"/"+j_date;
+	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'am' : 'pm');
 
-	var c_date_time = c_date + " " + j_hours + ":" + j_minutes;
+	var c_date = j_months+"/"+j_date+"/"+j_years;
+
+	var c_date_time = jjj_minutes + " "+ c_date ;
 
 	$('#addmeasurement-variable-date').datetimepicker({value: c_date_time,step:10});
 
-	/*
-	hourSelect = document.getElementById('addmeasurement-variable-timeh');
-	hourSelect.options[0] = new Option(12, 0);
-	for(var i=1; i<12; i++)
-		hourSelect.options[i] = new Option(i, i);
-	minSelect = document.getElementById('addmeasurement-variable-timem');
-	for(var i=0; i<60; i++)
-		minSelect.options[i] = new Option(i, i);
-	ampmSelect = document.getElementById('addmeasurement-variable-timeap');
-	ampmSelect.options[0] = new Option("AM", 0);
-	ampmSelect.options[1] = new Option("PM", 1);
-	
-	var currentTime = new Date();
-	$('#addmeasurement-variable-timeh').val(currentTime.getHours() % 12);
-	$('#addmeasurement-variable-timem').val(currentTime.getMinutes());
-	if(currentTime.getHours() >= 12)
-		$('#addmeasurement-variable-timeap').val(1);
-	else
-		$('#addmeasurement-variable-timeap').val(0);
-	*/
-	
-	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
 };
 
 // Load Date Time 
 var loadAddDateTime = function()
 {
-	/*
-	$("#add-addmeasurement-variable-date").datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true
-    });
-	$("#add-addmeasurement-variable-date").datepicker("setDate", new Date());
-	$("#add-addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
-	*/
 	$('#add-addmeasurement-variable-date').datetimepicker({
 	dayOfWeekStart : 1,
 	lang:'en',
-	startDate:	'1986/01/05'
-	
+	startDate:	'1986/01/05',
+	format: 'h:i a m/d/Y',
+	todayButton:true,
+	inverseButton:true
 	});
 
 	var currentTime = new Date();
@@ -521,35 +486,14 @@ var loadAddDateTime = function()
 	var j_hours = currentTime.getHours();
 	var j_minutes = currentTime.getMinutes();
 
-	var c_date = j_years+"/"+j_months+"/"+j_date;
+	var c_date = j_months+"/"+j_date+"/"+j_years;
 
-	var c_date_time = c_date + " " + j_hours + ":" + j_minutes;
+	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'am' : 'pm');
+
+	var c_date_time = jjj_minutes + " " + c_date ;
 
 	$('#add-addmeasurement-variable-date').datetimepicker({value: c_date_time, step:10});
 
-	
-	/*
-	hourSelect = document.getElementById('add-addmeasurement-variable-timeh');
-	hourSelect.options[0] = new Option(12, 0);
-	for(var i=1; i<12; i++)
-		hourSelect.options[i] = new Option(i, i);
-	minSelect = document.getElementById('add-addmeasurement-variable-timem');
-	for(var i=0; i<60; i++)
-		minSelect.options[i] = new Option(i, i);
-	ampmSelect = document.getElementById('add-addmeasurement-variable-timeap');
-	ampmSelect.options[0] = new Option("AM", 0);
-	ampmSelect.options[1] = new Option("PM", 1);
-	
-	var currentTime = new Date();
-	$('#add-addmeasurement-variable-timeh').val(currentTime.getHours() % 12);
-	$('#add-addmeasurement-variable-timem').val(currentTime.getMinutes());
-	if(currentTime.getHours() >= 12)
-		$('#add-addmeasurement-variable-timeap').val(1);
-	else
-		$('#add-addmeasurement-variable-timeap').val(0);
-	*/
-	
-	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
 };
 
 
