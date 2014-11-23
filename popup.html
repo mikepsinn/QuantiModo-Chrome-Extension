@@ -43,82 +43,83 @@
 
 		</div>
 
-		<div id="record_a_measurement_block" style="margin-top:0px; margin-left:6px; margin-right:6px;">
-			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." width=100></a></div>
+		<div id="record_a_measurement_block" style="margin-top:-6px; margin-left:10px; margin-right:4px;">
+			<div style="float:left;"><h3>What do you want to track?</h3></div><div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." width=100></a></div>
 			<div style="display:block;">
-			<input type="text" placeholder="Variable name" id="addmeasurement-variable-name">
-			<br />
-			<br />
+			<input type="text" placeholder="Variable name" id="addmeasurement-variable-name" style="font-weight:bold;">
+			
 			<div id="snd_gap" style="height:10px;">&nbsp;</div>
 			
 			<center>
 				<div><button id="button-record-a-measurement" class="button login">Record a Measurement</button></div>
 				<div style='float:right; margin-top:-20px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister"><img src="images/gtk-about.png" alt="Better living through data." height=20></a></div>
 			</center>
+			<div style="height:8px;">&nbsp;</div>
 			</div>
 
 		</div>
 
 
-		<div id="edt_record_a_measurement_block" style="margin-top:0px; margin-left:6px; margin-right:6px;">
-			<div style="float:left;"><h2>What do you want to track?</h2></div><div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate-1"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." width=100></a></div>
+		<div id="edt_record_a_measurement_block" style="margin-top:0px; margin-left:10px; margin-right:4px;">
+			<div style="float:left;"><h3>What do you want to track?</h3></div><div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate-1"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." width=100></a></div>
 
-			<input type="text" placeholder="Variable name" id="edt-addmeasurement-variable-name" style="width:96%; padding:5px;">
+			<input type="text" placeholder="Variable name" id="edt-addmeasurement-variable-name" style="font-weight:bold;">
 			
 			<div class="sectionTitle">
-				<h4 style="height:4px;">Enter Your Measurement</h4>
+				<h4 style="height:4px; margin-left:9px;">Enter Your Measurement</h4>
 			</div>
 
-			<table class="inputContainer">
+			<table class="inputContainer" cellpadding=8>
 				<tr>
 					<td width="10%">
-						<input id="addmeasurement-variable-value" type="text" >
+						<input id="addmeasurement-variable-value" type="text" style="font-weight:bold;">
 					</td>
-					<td width="50%">
+					<td width="40%">
 						<input id="addmeasurement-variable-unitCategory" type="hidden">
-						<select id="addmeasurement-variable-unit" style="margin-left: 2%; "></select></td>
+						<select id="addmeasurement-variable-unit" style="margin-left: 2%; font-weight:bold"></select></td>
 					<td>
-						<input id="addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%;">
+						<input id="addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%;width:80%;font-weight:bold"> <span style="float:right;margin-top:-1px"><img src="images/calender.png" width="16px" id="pickDate"> </span>
 					</td>
 				</tr>
 			</table>
-
+			<div style="height:12px;">&nbsp;</div>
 			<center>
 				<div><button id="button-edit-record-a-measurement" class="button login">Submit</button></div>
-				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_1"><img src="images/gtk-about.png" alt="Better living through data." height=30></a></div>
+				<div style='float:right; margin-top:-14px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_1"><img src="images/gtk-about.png" alt="Better living through data." height=20></a></div>
 			</center>
+			<div style="height:20px;">&nbsp;</div>
 			
 		</div>
 
-		<div id="add_record_a_measurement_block" style="margin-top:0px; margin-left:6px; margin-right:6px;">
-			<div style="float:left;"><h2>Create a New Variable</h2></div><div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate-2"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." width=100></a></div>
+		<div id="add_record_a_measurement_block" style="margin-top:0px; margin-left:10px; margin-right:4px;">
+			<div style="float:left;"><h3>Create a New Variable</h3></div><div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate-2"><img src="https://quantimo.do/wp-content/uploads/2014/10/QM-LOGO-CRAZY-ARROWS-Mike-Bigger-Q-1800.png" alt="Better living through data." width=100></a></div>
 
 			
-			<input type="text" placeholder="Variable name" id="add-addmeasurement-variable-name" style="width:96%; padding:5px;">
+			<input type="text" placeholder="Variable name" id="add-addmeasurement-variable-name">
 
 			<div class="sectionTitle">
 				<h4 style="height:4px;">Enter Your Measurement</h4>
 			</div>
 
-			<table class="inputContainer">
+			<table class="inputContainer" cellpadding=8>
 				<tr>
 					<td width="10%">
 					<input id="add-addmeasurement-variable-value" type="text">
 					
 					</td>
-					<td width="50%">
+					<td width="40%">
 					<input id="add-addmeasurement-variable-unitCategory" type="hidden">
 						<select id="add-addmeasurement-variable-unit" style="margin-left: 2%;"></select>
 					</td>
 					<td>
-						<input id="add-addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%;">
+						<input id="add-addmeasurement-variable-date" type="text" placeholder="Date" style="margin-left:2%;width:80%;"> <span style="float:right;margin-top:-1px"><img src="images/calender.png" width="16px" id="add-pickDate"> </span>
 					</td>
 				</tr>
 				<tr>
 					
 				</tr>
 			</table>
-			<div class="sectionTitle">
+			<div class="sectionTitle" style="margin-top:-8px;">
 				<h4 style="height:4px;">Variable Category</h4>
 
 			</div>
@@ -127,18 +128,21 @@
 				
 				<tr>
 					<td>
-					<select id="addmeasurement-variable-category"></select>
+					<select id="addmeasurement-variable-category" style="font-weight:bold;"></select>
 					
 					<input type="hidden" name="combineOperation" value="MEAN" id="combineOperation">
 					</td>
 				</tr>
 			</table>
+			<div style="height:12px;">&nbsp;</div>
 			
 
 			<center>
 				<div><button id="button-add-record-a-measurement" class="button login">Create Variable & Submit Measurement</button></div>
-				<div style='float:right; margin-top:-30px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_2"><img src="images/gtk-about.png" alt="Better living through data." height=30></a></div>
+				<div style='float:right; margin-top:-6px;'><a href="#" title="QuantiModo" id="btnQuantiModoRegister_2"><img src="images/gtk-about.png" alt="Better living through data." height=20></a></div>
 			</center>
+
+			<div style="height:20px;">&nbsp;</div>
 
 		</div>
 

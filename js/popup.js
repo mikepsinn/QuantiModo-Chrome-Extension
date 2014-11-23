@@ -12,6 +12,15 @@ function clearNotifications()
 
 function setBlockHideShow() 
 {
+
+	$('#pickDate').click(function(){
+		$('#addmeasurement-variable-date').datetimepicker('show'); //support hide,show and destroy command
+	});
+
+	$('#add-pickDate').click(function(){
+		$('#add-addmeasurement-variable-date').datetimepicker('show'); //support hide,show and destroy command
+	});
+
 	$("#signup_block").hide();
 	$("#record_a_measurement_block").hide();
 	$("#edt_record_a_measurement_block").hide();
@@ -495,7 +504,6 @@ var loadAddDateTime = function()
 	$('#add-addmeasurement-variable-date').datetimepicker({value: c_date_time, step:10});
 
 };
-
 
 document.addEventListener('DOMContentLoaded', function () 
 {
