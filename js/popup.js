@@ -171,6 +171,9 @@ var onEdtButtonClicked = function()
 	var valueCategory = $("#addmeasurement-variable-category").val();
 	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#addmeasurement-variable-date").val();
+
+	datetimeString = datetimeString.replace("AM","");
+	datetimeString = datetimeString.replace("PM","");
 	
 	var hour = $('#addmeasurement-variable-timeh').val();
 	var min = $('#addmeasurement-variable-timem').val();
@@ -248,6 +251,13 @@ var onAddButtonClicked = function()
 	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#add-addmeasurement-variable-date").val();
 	
+	//alert (Date.parse(datetimeString)) ;
+	datetimeString = datetimeString.replace("AM","");
+	datetimeString = datetimeString.replace("PM","");
+	//
+
+
+	//year, month, day, hours, minutes, seconds, milliseconds
 	var hour = $('#add-addmeasurement-variable-timeh').val();
 	var min = $('#add-addmeasurement-variable-timem').val();
 	var ap = $('#add-addmeasurement-variable-timeap').val();
@@ -312,7 +322,7 @@ var onVariableNameInputFocussed = function()
 };
 var onVariableNameInputUnfocussed = function()
 {
-	$("#snd_gap").height('10px');
+	//$("#snd_gap").height('10px');
 	//document.getElementById('sectionMeasurementInput').style.opacity="1";
 };
 
@@ -442,6 +452,12 @@ var loadAddVariableUnits = function()
 	});
 };
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
 
 var loadDateTime = function()
@@ -451,7 +467,7 @@ var loadDateTime = function()
 	dayOfWeekStart : 1,
 	lang:'en',
 	startDate:	'1986/01/05',
-	format: 'h:i a m/d/Y'
+	format: 'h:i A m/d/Y'
 	});
 	
 
@@ -461,10 +477,10 @@ var loadDateTime = function()
 	var j_months = currentTime.getMonth();
 	var j_date = currentTime.getDate();
 
-	var j_hours = currentTime.getHours();
-	var j_minutes = currentTime.getMinutes();
+	var j_hours = addZero(currentTime.getHours());
+	var j_minutes = addZero(currentTime.getMinutes());
 
-	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'am' : 'pm');
+	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'AM' : 'PM');
 
 	var c_date = j_months+"/"+j_date+"/"+j_years;
 
@@ -474,6 +490,8 @@ var loadDateTime = function()
 
 };
 
+
+
 // Load Date Time 
 var loadAddDateTime = function()
 {
@@ -481,7 +499,7 @@ var loadAddDateTime = function()
 	dayOfWeekStart : 1,
 	lang:'en',
 	startDate:	'1986/01/05',
-	format: 'h:i a m/d/Y',
+	format: 'h:i A m/d/Y',
 	todayButton:true,
 	inverseButton:true
 	});
@@ -492,12 +510,12 @@ var loadAddDateTime = function()
 	var j_months = currentTime.getMonth();
 	var j_date = currentTime.getDate();
 
-	var j_hours = currentTime.getHours();
-	var j_minutes = currentTime.getMinutes();
+	var j_hours = addZero(currentTime.getHours());
+	var j_minutes = addZero(currentTime.getMinutes());
 
 	var c_date = j_months+"/"+j_date+"/"+j_years;
 
-	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'am' : 'pm');
+	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'AM' : 'PM');
 
 	var c_date_time = jjj_minutes + " " + c_date ;
 
