@@ -112,7 +112,14 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
 	} 
 	else if(request.message == "getVariableUnits") 
 	{
+		
 		getVariableUnits(request.params, function (responseText) {
+			sendResponse(responseText);
+        });
+		return true;
+	} else if ( request.message == "getVariableCategories" )
+	{
+		getVariableCategories(request.params, function (responseText) {
 			sendResponse(responseText);
         });
 		return true;
@@ -164,6 +171,26 @@ function getVariables(params, onDoneListener)
 		};
 	xhr.send(JSON.stringify(params));
 }
+
+// Categories Filled
+function getVariableCategories(params, onDoneListener)
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://quantimo.do/api/variableCategories", true);
+	xhr.onreadystatechange = function() 
+		{
+			// If the request is completed
+			if (xhr.readyState == 4) 
+			{
+				if(onDoneListener != null)
+				{
+					onDoneListener(xhr.responseText);
+				}
+			}
+		};
+	xhr.send(JSON.stringify(params));
+}
+
 
 function getVariableUnits(params, onDoneListener)
 {

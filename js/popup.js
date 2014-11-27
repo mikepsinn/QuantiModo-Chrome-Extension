@@ -12,7 +12,14 @@ function clearNotifications()
 
 function setBlockHideShow() 
 {
-	
+
+	$('#pickDate').click(function(){
+		$('#addmeasurement-variable-date').datetimepicker('show'); //support hide,show and destroy command
+	});
+
+	$('#add-pickDate').click(function(){
+		$('#add-addmeasurement-variable-date').datetimepicker('show'); //support hide,show and destroy command
+	});
 
 	$("#signup_block").hide();
 	$("#record_a_measurement_block").hide();
@@ -22,8 +29,10 @@ function setBlockHideShow()
 	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
 	  function (cookie) {
 		if (cookie) {
+			$('body').css('width', '360px');
 			$("#record_a_measurement_block").show();
 		} else {
+			$('body').css('width', '270px');
 			$("#signup_block").show();
 		}
 	});
@@ -48,9 +57,20 @@ function setButtonListeners()
 	document.getElementById('button-edit-record-a-measurement').onclick = onEdtButtonClicked;
 	document.getElementById('button-add-record-a-measurement').onclick = onAddButtonClicked;
 	document.getElementById('anhor-register').onclick = onRegisterAClicked;
+	
 	document.getElementById('btnQuantiModoRegister').onclick = btnQuantiModoRegisterClick;
+
 	document.getElementById('btnQuantiModoRegister_1').onclick = btnQuantiModoRegisterClick;
 	document.getElementById('btnQuantiModoRegister_2').onclick = btnQuantiModoRegisterClick;
+
+	document.getElementById('logo-correlate').onclick = btnQuantiModoLogoCorrelateClick;
+	document.getElementById('logo-correlate-1').onclick = btnQuantiModoLogoCorrelateClick;
+	document.getElementById('logo-correlate-2').onclick = btnQuantiModoLogoCorrelateClick;
+
+	//var optionsUrl = chrome.extension.getURL("src/options/options.html"); 
+	//var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
+
+
 		
 };
 
@@ -89,7 +109,17 @@ var onQmRcdMstButtonClicked = function()
 // registration button clicked
 var btnQuantiModoRegisterClick = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/analyze/" });
+	var optionsUrl = chrome.extension.getURL("options/options.html"); 
+	//var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
+
+	chrome.tabs.create({ url: optionsUrl });
+};
+
+
+// registration button clicked
+var btnQuantiModoLogoCorrelateClick = function()
+{
+	chrome.tabs.create({ url: "https://quantimo.do/correlate/" });
 };
 
 
@@ -139,16 +169,24 @@ var onEdtButtonClicked = function()
 	var unit = $("#addmeasurement-variable-unit").val();
 	var value = $("#addmeasurement-variable-value").val();
 	var valueCategory = $("#addmeasurement-variable-category").val();
-	var combineOp = $("input:radio[name ='combineOperation']:checked").val();
+	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#addmeasurement-variable-date").val();
+
+	datetimeString = datetimeString.replace("AM","");
+	datetimeString = datetimeString.replace("PM","");
 	
 	var hour = $('#addmeasurement-variable-timeh').val();
 	var min = $('#addmeasurement-variable-timem').val();
 	var ap = $('#addmeasurement-variable-timeap').val();
 	var datetime = new Date(datetimeString);
-	datetime.setHours(parseInt(hour) + (ap * 12));
+	
+	/*
+	alert (datetime) ; 
+	alert (Math.floor(datetime.getTime()  / 1000));
+	/*datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
 	datetime.setSeconds(0);
+	*/
 
 	if (name == '') {
 		alert("Please enter the variable name."); return;
@@ -203,7 +241,6 @@ var onEdtButtonClicked = function()
 };
 
 
-
 var onAddButtonClicked = function()
 {
 	// Create an array of measurements
@@ -211,16 +248,26 @@ var onAddButtonClicked = function()
 	var unit = $("#add-addmeasurement-variable-unit").val();
 	var value = $("#add-addmeasurement-variable-value").val();
 	var valueCategory = $("#addmeasurement-variable-category").val();
-	var combineOp = $("input:radio[name ='combineOperation']:checked").val();
+	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#add-addmeasurement-variable-date").val();
 	
+	//alert (Date.parse(datetimeString)) ;
+	datetimeString = datetimeString.replace("AM","");
+	datetimeString = datetimeString.replace("PM","");
+	//
+
+
+	//year, month, day, hours, minutes, seconds, milliseconds
 	var hour = $('#add-addmeasurement-variable-timeh').val();
 	var min = $('#add-addmeasurement-variable-timem').val();
 	var ap = $('#add-addmeasurement-variable-timeap').val();
 	var datetime = new Date(datetimeString);
+
+	/*
 	datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
 	datetime.setSeconds(0);
+	*/
 
 	if (name == '') {
 		alert("Please enter the variable name."); return;
@@ -250,7 +297,6 @@ var onAddButtonClicked = function()
 									]
 									
 						};
-
 	chrome.extension.sendMessage(request, function(responseText) {
 			var response = $.parseJSON(responseText);
 			if(response.success == true)
@@ -271,10 +317,12 @@ var onAddButtonClicked = function()
 
 var onVariableNameInputFocussed = function()
 {
+		$("#snd_gap").height('100px');
 	//document.getElementById('sectionMeasurementInput').style.opacity="0.2";
 };
 var onVariableNameInputUnfocussed = function()
 {
+	//$("#snd_gap").height('10px');
 	//document.getElementById('sectionMeasurementInput').style.opacity="1";
 };
 
@@ -283,7 +331,6 @@ var getVariableWithName = function(variableName)
 	var filteredVars = jQuery.grep(variables, function (variable, i) {
 			return variable.name == variableName;
 	});
-	
 	if (filteredVars.length > 0) return filteredVars[0];
 	return null;
 };
@@ -296,6 +343,33 @@ var getUnitWithAbbriatedName = function(unitAbbr)
 	
 	if (filteredUnits.length > 0) return filteredUnits[0];
 	return null;
+};
+
+
+var loadVariableCategories = function()
+{
+	var request = {message: "getVariableCategories", params: {}};
+
+	chrome.extension.sendMessage(request, function(responseText) {
+		variables = $.parseJSON(responseText);
+		var varnames = [];
+		var categories = [];
+		variableCategorySelect = document.getElementById('addmeasurement-variable-category');
+		$.each(variables.sort(function(a, b)
+		{
+			return a.name.localeCompare(b.name);
+		}), function(_, variable)
+		{
+			//varnames.push({label: variable.name, category: variable.category});
+			varnames.push(variable.name);
+			categories.push(variable.name);
+		});
+		
+		categories.sort();
+		for(var i=0; i<categories.length; i++)
+			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+		
+	});
 };
 
 
@@ -312,10 +386,12 @@ var loadVariables = function()
 						}
 						that._renderItemData( ul, item );
 					});
+					
 				}
 		  });
 		  
 	var request = {message: "getVariables", params: {}};
+
 	chrome.extension.sendMessage(request, function(responseText) {
 		//unitSelect = document.getElementById('addmeasurement-variable-name');
 		variables = $.parseJSON(responseText);
@@ -329,19 +405,25 @@ var loadVariables = function()
 		{
 			//varnames.push({label: variable.name, category: variable.category});
 			varnames.push(variable.name);
+			/* commented to fill category ....
 			if ($.inArray(variable.category, categories)==-1) {
 				categories.push(variable.category);
 			}
+			*/
+
 		});
-		
+
+		/*
 		categories.sort();
 		for(var i=0; i<categories.length; i++)
 			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+		*/
+
 		
 		$("#addmeasurement-variable-name").autocomplete({
-		//$("#addmeasurement-variable-name").catcomplete({
 			source: varnames,
 			select: function (event, ui) {
+				
 				document.getElementById("addmeasurement-variable-value").focus();
 				var variable = getVariableWithName(ui.item.label);
 				$("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
@@ -361,159 +443,123 @@ var loadVariables = function()
 
 var loadVariableUnits = function()
 {
-	$( "#addmeasurement-variable-unitCategory" ).change(function() {
-		
-		var filteredUnits = jQuery.grep(units, function (unit, i) {
-			return unit.category == $( "#addmeasurement-variable-unitCategory" ).val();
-		});
-		$( "#addmeasurement-variable-unit option").remove();
-		unitSelect = document.getElementById('addmeasurement-variable-unit');
-		//unitSelect.options = [];
-		$.each(filteredUnits.sort(function(a, b)
-		{
-			return a.name.localeCompare(b.name);
-		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-		});
-	});
-
+	
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('addmeasurement-variable-unit');
-		unitCategorySelect = document.getElementById('addmeasurement-variable-unitCategory');
 		units = $.parseJSON(responseText);
-		var categories = [];
+	
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			//unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-			if ($.inArray(unit.category, categories)==-1) {
-				categories.push(unit.category);
-			}
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+			
 		});
-		categories.sort();
-		for(var i=0; i<categories.length; i++)
-			unitCategorySelect.options[unitCategorySelect.options.length] = new Option(categories[i], categories[i]);
 
-		$( "#addmeasurement-variable-unitCategory").val(categories[0]).trigger('change');
 	});
+
 };
 
 // Load option for the Distance
 
 var loadAddVariableUnits = function()
 {
-	$( "#add-addmeasurement-variable-unitCategory" ).change(function() {
-		
-		var filteredUnits = jQuery.grep(units, function (unit, i) {
-			return unit.category == $( "#add-addmeasurement-variable-unitCategory" ).val();
-		});
-		$( "#add-addmeasurement-variable-unit option").remove();
-		unitSelect = document.getElementById('add-addmeasurement-variable-unit');
-		//unitSelect.options = [];
-		$.each(filteredUnits.sort(function(a, b)
-		{
-			return a.name.localeCompare(b.name);
-		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-		});
-	});
+	
 
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('add-addmeasurement-variable-unit');
-		unitCategorySelect = document.getElementById('add-addmeasurement-variable-unitCategory');
 		units = $.parseJSON(responseText);
-		var categories = [];
+		
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			//unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
-			if ($.inArray(unit.category, categories)==-1) {
-				categories.push(unit.category);
-			}
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+				
 		});
-		categories.sort();
-		for(var i=0; i<categories.length; i++)
-			unitCategorySelect.options[unitCategorySelect.options.length] = new Option(categories[i], categories[i]);
 
-		$( "#add-addmeasurement-variable-unitCategory").val(categories[0]).trigger('change');
 	});
 };
 
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
 
 
 var loadDateTime = function()
 {
-	$("#addmeasurement-variable-date").datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true
-    });
-	$("#addmeasurement-variable-date").datepicker("setDate", new Date());
-	$("#addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
+
+	$('#addmeasurement-variable-date').datetimepicker({
+	dayOfWeekStart : 1,
+	lang:'en',
+	startDate:	'1986/01/05',
+	format: 'h:i A m/d/Y'
+	});
 	
-	hourSelect = document.getElementById('addmeasurement-variable-timeh');
-	hourSelect.options[0] = new Option(12, 0);
-	for(var i=1; i<12; i++)
-		hourSelect.options[i] = new Option(i, i);
-	minSelect = document.getElementById('addmeasurement-variable-timem');
-	for(var i=0; i<60; i++)
-		minSelect.options[i] = new Option(i, i);
-	ampmSelect = document.getElementById('addmeasurement-variable-timeap');
-	ampmSelect.options[0] = new Option("AM", 0);
-	ampmSelect.options[1] = new Option("PM", 1);
-	
+
 	var currentTime = new Date();
-	$('#addmeasurement-variable-timeh').val(currentTime.getHours() % 12);
-	$('#addmeasurement-variable-timem').val(currentTime.getMinutes());
-	if(currentTime.getHours() >= 12)
-		$('#addmeasurement-variable-timeap').val(1);
-	else
-		$('#addmeasurement-variable-timeap').val(0);
-	
-	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
+
+	var j_years = currentTime.getFullYear();
+	var j_months = currentTime.getMonth();
+	var j_date = currentTime.getDate();
+
+	var j_hours = addZero(currentTime.getHours());
+	var j_minutes = addZero(currentTime.getMinutes());
+
+	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'AM' : 'PM');
+
+	var c_date = j_months+"/"+j_date+"/"+j_years;
+
+	var c_date_time = jjj_minutes + " "+ c_date ;
+
+	$('#addmeasurement-variable-date').datetimepicker({value: c_date_time,step:10});
+
 };
+
+
 
 // Load Date Time 
 var loadAddDateTime = function()
 {
-	$("#add-addmeasurement-variable-date").datepicker({
-      showOtherMonths: true,
-      selectOtherMonths: true
-    });
-	$("#add-addmeasurement-variable-date").datepicker("setDate", new Date());
-	$("#add-addmeasurement-variable-date").datepicker( "option", "dateFormat", "mm/dd/y");
-	
-	hourSelect = document.getElementById('add-addmeasurement-variable-timeh');
-	hourSelect.options[0] = new Option(12, 0);
-	for(var i=1; i<12; i++)
-		hourSelect.options[i] = new Option(i, i);
-	minSelect = document.getElementById('add-addmeasurement-variable-timem');
-	for(var i=0; i<60; i++)
-		minSelect.options[i] = new Option(i, i);
-	ampmSelect = document.getElementById('add-addmeasurement-variable-timeap');
-	ampmSelect.options[0] = new Option("AM", 0);
-	ampmSelect.options[1] = new Option("PM", 1);
-	
-	var currentTime = new Date();
-	$('#add-addmeasurement-variable-timeh').val(currentTime.getHours() % 12);
-	$('#add-addmeasurement-variable-timem').val(currentTime.getMinutes());
-	if(currentTime.getHours() >= 12)
-		$('#add-addmeasurement-variable-timeap').val(1);
-	else
-		$('#add-addmeasurement-variable-timeap').val(0);
-	
-	//$("#addmeasurement-variable-date").val(currentTime.getFullYear() + '-' + (currentTime.getMonth() + 1) + '-' + currentTime.getDate();// + ' ' + currentTime.getHours() + ':00');
-};
+	$('#add-addmeasurement-variable-date').datetimepicker({
+	dayOfWeekStart : 1,
+	lang:'en',
+	startDate:	'1986/01/05',
+	format: 'h:i A m/d/Y',
+	todayButton:true,
+	inverseButton:true
+	});
 
+	var currentTime = new Date();
+
+	var j_years = currentTime.getFullYear();
+	var j_months = currentTime.getMonth();
+	var j_date = currentTime.getDate();
+
+	var j_hours = addZero(currentTime.getHours());
+	var j_minutes = addZero(currentTime.getMinutes());
+
+	var c_date = j_months+"/"+j_date+"/"+j_years;
+
+	var jjj_minutes = ((currentTime.getHours() %12) ? currentTime.getHours() % 12 : 12)+':'+currentTime.getMinutes()+(currentTime.getHours() < 12 ? 'AM' : 'PM');
+
+	var c_date_time = jjj_minutes + " " + c_date ;
+
+	$('#add-addmeasurement-variable-date').datetimepicker({value: c_date_time, step:10});
+
+};
 
 document.addEventListener('DOMContentLoaded', function () 
 {
 	setBlockHideShow();
 	setButtonListeners();
 	loadVariables();
+	loadVariableCategories();
 
 	loadVariableUnits();
 	loadAddVariableUnits();
@@ -526,27 +572,5 @@ document.addEventListener('DOMContentLoaded', function ()
 	inputField.onblur = onVariableNameInputUnfocussed;
 	inputField.focus();
 	
-	/*
-	var backgroundPage = chrome.extension.getBackgroundPage();
-	backgroundPage.isUserLoggedIn(function(isLoggedIn)
-	{
-		if(!isLoggedIn)
-		{
-
-		}
-	});
-	*/
-	/*
-	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
-	  function (cookie) {
-		if (cookie) {
-		  console.log(cookie.value); // print
-		}
-		else {
-			var url = "https://quantimo.do/analyze";
-			chrome.tabs.create({"url":url, "selected":true});
-		}
-	});
-	*/
 
 });
