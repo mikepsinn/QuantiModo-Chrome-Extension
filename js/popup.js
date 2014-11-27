@@ -331,7 +331,6 @@ var getVariableWithName = function(variableName)
 	var filteredVars = jQuery.grep(variables, function (variable, i) {
 			return variable.name == variableName;
 	});
-	
 	if (filteredVars.length > 0) return filteredVars[0];
 	return null;
 };
@@ -344,6 +343,33 @@ var getUnitWithAbbriatedName = function(unitAbbr)
 	
 	if (filteredUnits.length > 0) return filteredUnits[0];
 	return null;
+};
+
+
+var loadVariableCategories = function()
+{
+	var request = {message: "getVariableCategories", params: {}};
+
+	chrome.extension.sendMessage(request, function(responseText) {
+		variables = $.parseJSON(responseText);
+		var varnames = [];
+		var categories = [];
+		variableCategorySelect = document.getElementById('addmeasurement-variable-category');
+		$.each(variables.sort(function(a, b)
+		{
+			return a.name.localeCompare(b.name);
+		}), function(_, variable)
+		{
+			//varnames.push({label: variable.name, category: variable.category});
+			varnames.push(variable.name);
+			categories.push(variable.name);
+		});
+		
+		categories.sort();
+		for(var i=0; i<categories.length; i++)
+			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+		
+	});
 };
 
 
@@ -379,17 +405,22 @@ var loadVariables = function()
 		{
 			//varnames.push({label: variable.name, category: variable.category});
 			varnames.push(variable.name);
+			/* commented to fill category ....
 			if ($.inArray(variable.category, categories)==-1) {
 				categories.push(variable.category);
 			}
+			*/
+
 		});
-		
+
+		/*
 		categories.sort();
 		for(var i=0; i<categories.length; i++)
 			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+		*/
+
 		
 		$("#addmeasurement-variable-name").autocomplete({
-		//$("#addmeasurement-variable-name").catcomplete({
 			source: varnames,
 			select: function (event, ui) {
 				
@@ -528,6 +559,7 @@ document.addEventListener('DOMContentLoaded', function ()
 	setBlockHideShow();
 	setButtonListeners();
 	loadVariables();
+	loadVariableCategories();
 
 	loadVariableUnits();
 	loadAddVariableUnits();
