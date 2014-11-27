@@ -453,7 +453,7 @@ var loadVariableUnits = function()
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
 			
 		});
 
@@ -476,7 +476,7 @@ var loadAddVariableUnits = function()
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
-			unitSelect.options[unitSelect.options.length] = new Option(unit.name + " (" + unit.abbreviatedName + ")", unit.abbreviatedName);
+			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
 				
 		});
 
