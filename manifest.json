@@ -15,7 +15,7 @@
 	"storage",
 	"cookies",
 	"tabs",
-    "https://quantimo.do/*"
+    "https://app.quantimo.do/*"
   ],
   "browser_action": {
     "default_icon": "images/QM-LOGO-ICON-Chrome-128-128.png",

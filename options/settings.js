@@ -1,7 +1,7 @@
 function loadAccountDetails()
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "https://quantimo.do/api/user", true);
+	xhr.open("GET", "https://app.quantimo.do/api/user", true);
 	xhr.onreadystatechange = function() 
 		{
 			if (xhr.readyState == 4) 
