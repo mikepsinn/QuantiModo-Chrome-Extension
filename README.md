@@ -1,6 +1,8 @@
 QuantiModo-ChromeExtension
 ================
 
+[![Code Climate](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-Chrome-Extension/badges/gpa.svg)](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-Chrome-Extension)
+
 NOTE THAT YOU MUST BE LOGGED INTO https://quantimo.do/ FOR YOUR RATINGS TO BE RECORDED.  THIS IS A BETA TESTING RELEASE.  PLEASE EMAIL INFO@QUANTIMO.DO WITH QUESTIONS OR SUGGESTIONS AND I'LL RESPOND IMMEDIATELY. THANK YOU!
 
 Use Quantimodo for Chrome to effortlessly track anything! You can track your sleep, diet, medication, physical activity, anything else that can be quantified.
