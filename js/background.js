@@ -7,7 +7,7 @@
 */
 function isUserLoggedIn(resultListener)
 {
-	chrome.cookies.get({ url: 'https://app.quantimo.do', name: 'wordpress_logged_in_c9005e0fb733417360658b145e2ed413	' },
+	chrome.cookies.get({ url: 'https://app.quantimo.do', name: 'wordpress_logged_in_c9005e0fb733417360658b145e2ed413' },
 	  function (cookie) {
 		if (cookie) {
 		  console.log(cookie.value);
