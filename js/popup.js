@@ -26,7 +26,7 @@ function setBlockHideShow()
 	$("#edt_record_a_measurement_block").hide();
 	$("#add_record_a_measurement_block").hide();
 
-	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
+	chrome.cookies.get({ url: 'https://app.quantimo.do', name: 'wordpress_logged_in_c9005e0fb733417360658b145e2ed413' },
 	  function (cookie) {
 		if (cookie) {
 			$('body').css('width', '360px');
@@ -119,38 +119,38 @@ var btnQuantiModoRegisterClick = function()
 // registration button clicked
 var btnQuantiModoLogoCorrelateClick = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/correlate/" });
+	chrome.tabs.create({ url: "https://app.quantimo.do/correlate/" });
 };
 
 
 // registration button clicked
 var onRegisterAClicked = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/citizen-science/register/" });
+	chrome.tabs.create({ url: "https://app.quantimo.do/citizen-science/register/" });
 };
 
 // facebook button clicked
 var onQmFacebookButtonClicked = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/wp-login.php?action=wordpress_social_authenticate&provider=Facebook&redirect_to=https%3A%2F%2Fquantimo.do%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fquantimo.do" });
+	chrome.tabs.create({ url: "https://app.quantimo.do/wp-login.php?action=wordpress_social_authenticate&provider=Facebook&redirect_to=https%3A%2F%2Fquantimo.do%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fquantimo.do" });
 };
 
 // google button clicked
 var onQmGoogleButtonClicked = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/wp-login.php?action=wordpress_social_authenticate&provider=Google&redirect_to=https%3A%2F%2Fquantimo.do%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fquantimo.do" });
+	chrome.tabs.create({ url: "https://app.quantimo.do/wp-login.php?action=wordpress_social_authenticate&provider=Google&redirect_to=https%3A%2F%2Fquantimo.do%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fquantimo.do" });
 };
 
 // Simple Sign In button clicked
 var onQmSignButtonClicked = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/analyze" });
+	chrome.tabs.create({ url: "https://app.quantimo.do/analyze" });
 };
 
 
 var onQmButtonClicked = function()
 {
-	chrome.tabs.create({ url: "https://quantimo.do/analyze" });
+	chrome.tabs.create({ url: "https://app.quantimo.do/analyze" });
 };
 var onCloseButtonClicked = function()
 {

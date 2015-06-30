@@ -7,13 +7,13 @@
 */
 function isUserLoggedIn(resultListener)
 {
-	chrome.cookies.get({ url: 'https://quantimo.do', name: 'wordpress_logged_in_df6e405f82a01fe45903695de91ec81d' },
+	chrome.cookies.get({ url: 'https://app.quantimo.do', name: 'wordpress_logged_in_c9005e0fb733417360658b145e2ed413' },
 	  function (cookie) {
 		if (cookie) {
 		  console.log(cookie.value);
 		}
 		else {
-			var url = "https://quantimo.do/analyze";
+			var url = "https://app.quantimo.do/analyze";
 			chrome.tabs.create({"url":url, "selected":true});
 		}
 	});
@@ -139,7 +139,7 @@ chrome.tabs.getSelected(null, function(tab){
 function uploadMeasurements(measurements, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "https://quantimo.do/api/measurements/v2", true);
+	xhr.open("POST", "https://app.quantimo.do/api/measurements/v2", true);
 	xhr.onreadystatechange = function() 
 		{
 			// If the request is completed
@@ -157,7 +157,7 @@ function uploadMeasurements(measurements, onDoneListener)
 function getVariables(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "https://quantimo.do/api/variables", true);
+	xhr.open("GET", "https://app.quantimo.do/api/variables", true);
 	xhr.onreadystatechange = function() 
 		{
 			// If the request is completed
@@ -176,7 +176,7 @@ function getVariables(params, onDoneListener)
 function getVariableCategories(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "https://quantimo.do/api/variableCategories", true);
+	xhr.open("GET", "https://app.quantimo.do/api/variableCategories", true);
 	xhr.onreadystatechange = function() 
 		{
 			// If the request is completed
@@ -195,7 +195,7 @@ function getVariableCategories(params, onDoneListener)
 function getVariableUnits(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "https://quantimo.do/api/units", true);
+	xhr.open("GET", "https://app.quantimo.do/api/units", true);
 	xhr.onreadystatechange = function() 
 		{
 			// If the request is completed
