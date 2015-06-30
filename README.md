@@ -3,7 +3,7 @@ QuantiModo-ChromeExtension
 
 [![Code Climate](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-Chrome-Extension/badges/gpa.svg)](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-Chrome-Extension)
 
-NOTE THAT YOU MUST BE LOGGED INTO https://quantimo.do/ FOR YOUR RATINGS TO BE RECORDED.  THIS IS A BETA TESTING RELEASE.  PLEASE EMAIL INFO@QUANTIMO.DO WITH QUESTIONS OR SUGGESTIONS AND I'LL RESPOND IMMEDIATELY. THANK YOU!
+NOTE THAT YOU MUST BE LOGGED INTO https://app.quantimo.do/ FOR YOUR RATINGS TO BE RECORDED.  THIS IS A BETA TESTING RELEASE.  PLEASE EMAIL INFO@QUANTIMO.DO WITH QUESTIONS OR SUGGESTIONS AND I'LL RESPOND IMMEDIATELY. THANK YOU!
 
 Use Quantimodo for Chrome to effortlessly track anything! You can track your sleep, diet, medication, physical activity, anything else that can be quantified.
 
@@ -15,7 +15,7 @@ How to Record a Measurement
 
 3. ADD YOUR MEASUREMENT - Then enter the value for the measurement and select the correct units.
 
-4. SEND YOUR MEASUREMENT - After pressing the "ADD" button data is then sent to https://quantimo.do/.
+4. SEND YOUR MEASUREMENT - After pressing the "ADD" button data is then sent to https://app.quantimo.do/.
 
 At QuantiModo, this data can be combined with data from other applications, devices and electronic health records. Since the human mind is not powerful enough to retain all of the necessary information, this data integration feature is essential to identifying correlations and causal relationships.
 
@@ -32,7 +32,7 @@ Currenly, if the user clicks on the extension and not logged in, they are sent t
 Login Screen:
 ![login-dialog](https://cloud.githubusercontent.com/assets/2808553/4691816/c792d3be-5735-11e4-98c5-3124f0145134.png)
 
-That should use the same WordPress authentication logic found at https://quantimo.do/wp-login.php
+That should use the same WordPress authentication logic found at https://app.quantimo.do/wp-login.php
 
 Once they are logged in, they see this screen which uses the quantimodo/api/variables/search endpoint to autocomplete. If they press enter or click on a variable, it should move to the next screen.  This should function just like Google's autocomplete search. 
 
