@@ -2,6 +2,7 @@ QuantiModo-ChromeExtension
 ================
 
 [![Code Climate](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-Chrome-Extension/badges/gpa.svg)](https://codeclimate.com/github/Abolitionist-Project/QuantiModo-Chrome-Extension)
+[![Codacy Badge](https://www.codacy.com/project/badge/03d2c36f277d4c24bb66137c43e5df3b)](https://www.codacy.com/app/m_3/QuantiModo-Chrome-Extension)
 
 NOTE THAT YOU MUST BE LOGGED INTO https://app.quantimo.do/ FOR YOUR RATINGS TO BE RECORDED.  THIS IS A BETA TESTING RELEASE.  PLEASE EMAIL INFO@QUANTIMO.DO WITH QUESTIONS OR SUGGESTIONS AND I'LL RESPOND IMMEDIATELY. THANK YOU!
 
