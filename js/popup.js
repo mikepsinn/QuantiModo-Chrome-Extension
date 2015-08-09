@@ -339,22 +339,27 @@ var loadVariableCategories = function () {
     chrome.extension.sendMessage(request, function (response) {
 
         handleResponse(response, function (variableCategories) {
-            var variables = variableCategories;
-
+            variables = variableCategories;
             var varnames = [];
             var categories = [];
             variableCategorySelect = document.getElementById('addmeasurement-variable-category');
-            $.each(variables.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
-            }), function (_, variable) {
-                //varnames.push({label: variable.name, category: variable.category});
-                varnames.push(variable.name);
-                categories.push(variable.name);
-            });
 
-            categories.sort();
-            for (var i = 0; i < categories.length; i++)
-                variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+            if (variables.length) {
+                $.each(variables.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                }), function (_, variable) {
+                    //varnames.push({label: variable.name, category: variable.category});
+                    varnames.push(variable.name);
+                    categories.push(variable.name);
+                });
+            }
+
+            if (categories.length) {
+                categories.sort();
+                for (var i = 0; i < categories.length; i++)
+                    variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+            }
+
         });
 
     });
@@ -383,15 +388,18 @@ var loadVariables = function () {
 
         handleResponse(response, function (variables) {
 
-            var variables = variables;
+            variables = variables;
             var varnames = [];
             var categories = [];
-            var variableCategorySelect = document.getElementById('addmeasurement-variable-category');
-            $.each(variables.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
-            }), function (_, variable) {
-                varnames.push(variable.name);
-            });
+            variableCategorySelect = document.getElementById('addmeasurement-variable-category');
+
+            if (variables.length) {
+                $.each(variables.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                }), function (_, variable) {
+                    varnames.push(variable.name);
+                });
+            }
 
         });
 
@@ -439,16 +447,17 @@ var loadVariableUnits = function () {
     var request = {message: "getVariableUnits", params: {}};
     chrome.extension.sendMessage(request, function (response) {
 
-        handleResponse(response, function (units) {
-            var units = units;
-            var unitSelect = document.getElementById('addmeasurement-variable-unit');
+        handleResponse(response, function (variableUnits) {
+            units = variableUnits;
+            unitSelect = document.getElementById('addmeasurement-variable-unit');
 
-            $.each(units.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
-            }), function (_, unit) {
-                unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
-
-            });
+            if (units.length) {
+                $.each(units.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                }), function (_, unit) {
+                    unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+                });
+            }
 
         });
     });
@@ -463,15 +472,18 @@ var loadAddVariableUnits = function () {
     var request = {message: "getVariableUnits", params: {}};
     chrome.extension.sendMessage(request, function (response) {
 
-        handleResponse(response, function (untis) {
-            var units = response;
-            var unitSelect = document.getElementById('add-addmeasurement-variable-unit');
+        handleResponse(response, function (variableUnits) {
+            units = variableUnits;
+            unitSelect = document.getElementById('add-addmeasurement-variable-unit');
 
-            $.each(units.sort(function (a, b) {
-                return a.name.localeCompare(b.name);
-            }), function (_, unit) {
-                unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
-            });
+            if (units.length) {
+                $.each(units.sort(function (a, b) {
+                    return a.name.localeCompare(b.name);
+                }), function (_, unit) {
+                    unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+                });
+            }
+
         });
 
     });
@@ -581,7 +593,7 @@ document.addEventListener('DOMContentLoaded', function () {
     inputField.onfocus = onVariableNameInputFocussed;
     inputField.onblur = onVariableNameInputUnfocussed;
 
-    setInterval(function(){
+    setInterval(function () {
         inputField.focus();
     }, 50);
 
