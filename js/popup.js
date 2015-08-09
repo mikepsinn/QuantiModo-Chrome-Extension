@@ -572,7 +572,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var inputField = document.getElementById("addmeasurement-variable-name");
     inputField.onfocus = onVariableNameInputFocussed;
     inputField.onblur = onVariableNameInputUnfocussed;
-    inputField.focus();
 
+    setInterval(function(){
+        inputField.focus();
+    }, 50);
 
 });
