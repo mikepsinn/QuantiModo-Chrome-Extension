@@ -32,16 +32,6 @@ body {
     transition: opacity 350ms;
 }
 
-#addmeasurement-variable-name {
-    width: 94%;
-    padding: 2px;
-    line-height: 1.1em;
-    /*font-size: 1.1em; */
-    margin-left: 2px;
-    margin-top: -2px;
-    transition: all 250ms;
-}
-
 #add-addmeasurement-variable-name {
     width: 94%;
     padding: 2px;
@@ -408,4 +398,25 @@ button, .button, input[type=submit] {
 
 .ui-autocomplete-loading {
     background: url('images/ajax-loader.gif') no-repeat right center
+}
+
+.clearfix {
+    clear: both;
+}
+
+.validation-holder {
+    color: #FF0000;
+    clear: both;
+    margin-bottom: 5px;
+}
+
+#addmeasurement-variable-name {
+    width: 94%;
+    padding: 5px;
+    font-weight: 700;
+}
+
+#addmeasurement-variable-name.error {
+    box-shadow: 0px 1px 10px #ff0000;
+    outline: none;
 }

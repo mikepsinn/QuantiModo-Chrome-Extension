@@ -27,11 +27,11 @@ function isUserLoggedIn(resultListener)
 /*
 **	Called when the extension is installed
 */
-chrome.runtime.onInstalled.addListener(function() 
+chrome.runtime.onInstalled.addListener(function()
 {
 	//var notificationInterval = parseInt(localStorage["notificationInterval"] || "180");
 	var notificationInterval = -1;
-	
+
 	if(notificationInterval == -1)
 	{
 		chrome.alarms.clear("trackReportAlarm");
@@ -62,7 +62,7 @@ chrome.alarms.onAlarm.addListener(function(alarm)
 		}
 		chrome.notifications.create("trackReportNotification", notificationParams, function(id){});
 	}
-	
+
 	var showBadge = (localStorage["showBadge"] || "true") == "true" ? true : false;
 	if(showBadge)
 	{
@@ -78,7 +78,7 @@ chrome.notifications.onClicked.addListener(function(notificationId)
 {
 	if(notificationId == "trackReportNotification")
 	{
-		var windowParams = {url: "popup.html", 
+		var windowParams = {url: "popup.html",
 							type: 'panel',
 							width: 300,
 							height: 290,
@@ -90,29 +90,29 @@ chrome.notifications.onClicked.addListener(function(notificationId)
 });
 
 /*
-**	Handles extension-specific requests that come in, such as a 
+**	Handles extension-specific requests that come in, such as a
 ** 	request to upload a new measurement
 */
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
 {
 	console.log("Received request: " + request.message);
-	if(request.message == "uploadMeasurements") 
+	if(request.message == "uploadMeasurements")
 	{
 		uploadMeasurements(request.payload, function (responseText) {
 			sendResponse(responseText);
         });
 		return true;
-	} 
-	else if(request.message == "getVariables") 
+	}
+	else if(request.message == "getVariables")
 	{
 		getVariables(request.params, function (responseText) {
 			sendResponse(responseText);
         });
 		return true;
-	} 
-	else if(request.message == "getVariableUnits") 
+	}
+	else if(request.message == "getVariableUnits")
 	{
-		
+
 		getVariableUnits(request.params, function (responseText) {
 			sendResponse(responseText);
         });
@@ -124,7 +124,7 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse)
         });
 		return true;
 	}
-	
+
 });
 
 chrome.tabs.getSelected(null, function(tab){
@@ -140,10 +140,10 @@ function uploadMeasurements(measurements, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", "https://app.quantimo.do/api/measurements/v2", true);
-	xhr.onreadystatechange = function() 
+	xhr.onreadystatechange = function()
 		{
 			// If the request is completed
-			if (xhr.readyState == 4) 
+			if (xhr.readyState == 4)
 			{
 				if(onDoneListener != null)
 				{
@@ -158,18 +158,11 @@ function getVariables(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://app.quantimo.do/api/variables", true);
-	xhr.onreadystatechange = function() 
+	xhr.onreadystatechange = function()
 		{
-			// If the request is completed
-			if (xhr.readyState == 4) 
-			{
-				if(onDoneListener != null)
-				{
-					onDoneListener(xhr.responseText);
-				}
-			}
+            handleResponse(xhr, onDoneListener);
 		};
-	xhr.send(JSON.stringify(params));
+    xhr.send(JSON.stringify(params));
 }
 
 // Categories Filled
@@ -177,16 +170,9 @@ function getVariableCategories(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://app.quantimo.do/api/variableCategories", true);
-	xhr.onreadystatechange = function() 
+	xhr.onreadystatechange = function()
 		{
-			// If the request is completed
-			if (xhr.readyState == 4) 
-			{
-				if(onDoneListener != null)
-				{
-					onDoneListener(xhr.responseText);
-				}
-			}
+            handleResponse(xhr, onDoneListener);
 		};
 	xhr.send(JSON.stringify(params));
 }
@@ -196,16 +182,18 @@ function getVariableUnits(params, onDoneListener)
 {
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", "https://app.quantimo.do/api/units", true);
-	xhr.onreadystatechange = function() 
+	xhr.onreadystatechange = function()
 		{
-			// If the request is completed
-			if (xhr.readyState == 4) 
-			{
-				if(onDoneListener != null)
-				{
-					onDoneListener(xhr.responseText);
-				}
-			}
+			handleResponse(xhr,onDoneListener);
 		};
 	xhr.send(JSON.stringify(params));
+}
+
+function handleResponse(xhr,handler) {
+    // If the request is completed
+    if (xhr.readyState == 4) {
+        if (handler != null) {
+			handler({status: xhr.status, responseText: xhr.responseText});
+        }
+    }
 }
