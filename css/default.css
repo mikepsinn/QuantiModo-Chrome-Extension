@@ -405,3 +405,7 @@ button, .button, input[type=submit] {
     background-image: -o-linear-gradient(top, #fafafa 0%, #eeeeee 100%);
     background-image: linear-gradient(top, #fafafa 0%, #eeeeee 100%);
 }
+
+.ui-autocomplete-loading {
+    background: url('images/ajax-loader.gif') no-repeat right center
+}
