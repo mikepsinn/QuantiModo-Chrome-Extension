@@ -1,7 +1,7 @@
 var variables = [];
 var units = [];
 
-	
+
 function clearNotifications()
 {
 	var badgeParams = {text:""};
@@ -10,7 +10,7 @@ function clearNotifications()
 };
 
 
-function setBlockHideShow() 
+function setBlockHideShow()
 {
 
 	$('#pickDate').click(function(){
@@ -45,9 +45,9 @@ function setButtonListeners()
 
 	/*document.getElementById('button-add').onclick=onAddButtonClicked;
 	document.getElementById('button-close').onclick=onCloseButtonClicked;
-	
+
 	*/
-	
+
 	document.getElementById('button_quantimo_facebook_sign_in').onclick=onQmFacebookButtonClicked;
 	document.getElementById('button_quantimo_google_sign_in').onclick=onQmGoogleButtonClicked;
 	document.getElementById('button_quantimo_sign_in').onclick=onQmSignButtonClicked;
@@ -57,7 +57,7 @@ function setButtonListeners()
 	document.getElementById('button-edit-record-a-measurement').onclick = onEdtButtonClicked;
 	document.getElementById('button-add-record-a-measurement').onclick = onAddButtonClicked;
 	document.getElementById('anhor-register').onclick = onRegisterAClicked;
-	
+
 	document.getElementById('btnQuantiModoRegister').onclick = btnQuantiModoRegisterClick;
 
 	document.getElementById('btnQuantiModoRegister_1').onclick = btnQuantiModoRegisterClick;
@@ -67,11 +67,11 @@ function setButtonListeners()
 	document.getElementById('logo-correlate-1').onclick = btnQuantiModoLogoCorrelateClick;
 	document.getElementById('logo-correlate-2').onclick = btnQuantiModoLogoCorrelateClick;
 
-	//var optionsUrl = chrome.extension.getURL("src/options/options.html"); 
+	//var optionsUrl = chrome.extension.getURL("src/options/options.html");
 	//var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
 
 
-		
+
 };
 
 /**
@@ -93,8 +93,8 @@ var onQmRcdMstButtonClicked = function()
 		$("#add_record_a_measurement_block").show();
 		$("#add-addmeasurement-variable-name").val(name);
 
-	} 
-	else 
+	}
+	else
 	{
 		$("#record_a_measurement_block").hide();
 		$("#edt_record_a_measurement_block").show();
@@ -109,7 +109,7 @@ var onQmRcdMstButtonClicked = function()
 // registration button clicked
 var btnQuantiModoRegisterClick = function()
 {
-	var optionsUrl = chrome.extension.getURL("options/options.html"); 
+	var optionsUrl = chrome.extension.getURL("options/options.html");
 	//var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
 
 	chrome.tabs.create({ url: optionsUrl });
@@ -159,7 +159,7 @@ var onCloseButtonClicked = function()
 
 
 /**
- * Desc: 
+ * Desc:
  */
 
 var onEdtButtonClicked = function()
@@ -174,14 +174,14 @@ var onEdtButtonClicked = function()
 
 	datetimeString = datetimeString.replace("AM","");
 	datetimeString = datetimeString.replace("PM","");
-	
+
 	var hour = $('#addmeasurement-variable-timeh').val();
 	var min = $('#addmeasurement-variable-timem').val();
 	var ap = $('#addmeasurement-variable-timeap').val();
 	var datetime = new Date(datetimeString);
-	
+
 	/*
-	alert (datetime) ; 
+	alert (datetime) ;
 	alert (Math.floor(datetime.getTime()  / 1000));
 	/*datetime.setHours(parseInt(hour) + (ap * 12));
 	datetime.setMinutes(min);
@@ -198,11 +198,11 @@ var onEdtButtonClicked = function()
 	//var variable = getVariableWithName(name);
 	var measurements = 	[
 							{
-								timestamp: 	Math.floor(datetime.getTime()  / 1000), 
+								timestamp: 	Math.floor(datetime.getTime()  / 1000),
 								value: 		value
 							}
 						];
-	//alert ( measurements ) ; 
+	//alert ( measurements ) ;
 	// Add it to a request, payload is what we'll send to QuantiModo
 	var request =		{
 							message: "uploadMeasurements",
@@ -216,14 +216,14 @@ var onEdtButtonClicked = function()
 											unit:					unit
 										}
 									]
-									
+
 						};
 
 
 
 	chrome.extension.sendMessage(request, function(responseText) {
 		var response = $.parseJSON(responseText);
-		//alert (response) ; 
+		//alert (response) ;
 		if(response.success == true)
 		{
 			document.getElementById('addmeasurement-variable-value').value = "";
@@ -236,7 +236,7 @@ var onEdtButtonClicked = function()
 			console.log(responseText);
 		}
 	});
-		
+
 	clearNotifications();
 };
 
@@ -250,7 +250,7 @@ var onAddButtonClicked = function()
 	var valueCategory = $("#addmeasurement-variable-category").val();
 	var combineOp = $("#combineOperation").val();
 	var datetimeString = $("#add-addmeasurement-variable-date").val();
-	
+
 	//alert (Date.parse(datetimeString)) ;
 	datetimeString = datetimeString.replace("AM","");
 	datetimeString = datetimeString.replace("PM","");
@@ -278,7 +278,7 @@ var onAddButtonClicked = function()
 	//var variable = getVariableWithName(name);
 	var measurements = 	[
 							{
-								timestamp: 	Math.floor(datetime.getTime()  / 1000), 
+								timestamp: 	Math.floor(datetime.getTime()  / 1000),
 								value: 		value
 							}
 						];
@@ -295,7 +295,7 @@ var onAddButtonClicked = function()
 											unit:					unit
 										}
 									]
-									
+
 						};
 	chrome.extension.sendMessage(request, function(responseText) {
 			var response = $.parseJSON(responseText);
@@ -311,7 +311,7 @@ var onAddButtonClicked = function()
 				console.log(responseText);
 			}
 		});
-		
+
 	clearNotifications();
 };
 
@@ -340,7 +340,7 @@ var getUnitWithAbbriatedName = function(unitAbbr)
 	var filteredUnits = jQuery.grep(units, function (unit, i) {
 			return unit.abbreviatedName == unitAbbr;
 	});
-	
+
 	if (filteredUnits.length > 0) return filteredUnits[0];
 	return null;
 };
@@ -364,11 +364,11 @@ var loadVariableCategories = function()
 			varnames.push(variable.name);
 			categories.push(variable.name);
 		});
-		
+
 		categories.sort();
 		for(var i=0; i<categories.length; i++)
 			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
-		
+
 	});
 };
 
@@ -386,10 +386,10 @@ var loadVariables = function()
 						}
 						that._renderItemData( ul, item );
 					});
-					
+
 				}
 		  });
-		  
+
 	var request = {message: "getVariables", params: {}};
 
 	chrome.extension.sendMessage(request, function(responseText) {
@@ -426,8 +426,13 @@ var loadVariables = function()
                     method: 'GET',
                     url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val(),
                     success: function (data) {
+						variables= data;
                         resp($.map(data, function (variable) {
-                            return variable.name;
+                            return {
+								label: variable.name,
+								value: variable.name,
+                                variable: variable
+							}
                         }));
                     }
                 })
@@ -436,7 +441,8 @@ var loadVariables = function()
             select: function (event, ui) {
 
                 document.getElementById("addmeasurement-variable-value").focus();
-                var variable = getVariableWithName(ui.item.label);
+                //var variable = getVariableWithName(ui.item.label);
+				var variable = ui.item.variable;
                 $("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
                 if (variable == null) return;
                 $("#addmeasurement-variable-category").val(variable.category);
@@ -454,18 +460,18 @@ var loadVariables = function()
 
 var loadVariableUnits = function()
 {
-	
+
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('addmeasurement-variable-unit');
 		units = $.parseJSON(responseText);
-	
+
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
 			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
-			
+
 		});
 
 	});
@@ -476,19 +482,19 @@ var loadVariableUnits = function()
 
 var loadAddVariableUnits = function()
 {
-	
+
 
 	var request = {message: "getVariableUnits", params: {}};
 	chrome.extension.sendMessage(request, function(responseText) {
 		unitSelect = document.getElementById('add-addmeasurement-variable-unit');
 		units = $.parseJSON(responseText);
-		
+
 		$.each(units.sort(function(a, b)
 		{
 			return a.name.localeCompare(b.name);
 		}), function(_, unit){
 			unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
-				
+
 		});
 
 	});
@@ -511,7 +517,7 @@ var loadDateTime = function()
 	startDate:	'1986/01/05',
 	format: 'h:i A m/d/Y'
 	});
-	
+
 
 	var currentTime = new Date();
 
@@ -534,7 +540,7 @@ var loadDateTime = function()
 
 
 
-// Load Date Time 
+// Load Date Time
 var loadAddDateTime = function()
 {
 	$('#add-addmeasurement-variable-date').datetimepicker({
@@ -565,7 +571,7 @@ var loadAddDateTime = function()
 
 };
 
-document.addEventListener('DOMContentLoaded', function () 
+document.addEventListener('DOMContentLoaded', function ()
 {
 	setBlockHideShow();
 	setButtonListeners();
@@ -577,11 +583,15 @@ document.addEventListener('DOMContentLoaded', function ()
 
 	loadAddDateTime();
 	loadDateTime();
-	
+
 	var inputField = document.getElementById("addmeasurement-variable-name");
 	inputField.onfocus = onVariableNameInputFocussed;
 	inputField.onblur = onVariableNameInputUnfocussed;
-	inputField.focus();
-	
+
+    setInterval(function(){
+        inputField.focus();
+    }, 50);
+
+
 
 });
