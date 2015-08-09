@@ -419,23 +419,34 @@ var loadVariables = function()
 			variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
 		*/
 
-		
-		$("#addmeasurement-variable-name").autocomplete({
-			source: varnames,
-			select: function (event, ui) {
-				
-				document.getElementById("addmeasurement-variable-value").focus();
-				var variable = getVariableWithName(ui.item.label);
-				$("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
-				if (variable == null) return;
-				$( "#addmeasurement-variable-category").val(variable.category);
-				var variableUnit = getUnitWithAbbriatedName(variable.unit);
-				if (variableUnit == null) return;
-				$( "#addmeasurement-variable-unitCategory").val(variableUnit.category).trigger('change');
-				$( "#addmeasurement-variable-unit").val(variableUnit.abbreviatedName);
 
-			}
-		});
+        $("#addmeasurement-variable-name").autocomplete({
+            source: function (req, resp) {
+                $.ajax({
+                    method: 'GET',
+                    url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val(),
+                    success: function (data) {
+                        resp($.map(data, function (variable) {
+                            return variable.name;
+                        }));
+                    }
+                })
+            },
+            minLength: 2,
+            select: function (event, ui) {
+
+                document.getElementById("addmeasurement-variable-value").focus();
+                var variable = getVariableWithName(ui.item.label);
+                $("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
+                if (variable == null) return;
+                $("#addmeasurement-variable-category").val(variable.category);
+                var variableUnit = getUnitWithAbbriatedName(variable.unit);
+                if (variableUnit == null) return;
+                $("#addmeasurement-variable-unitCategory").val(variableUnit.category).trigger('change');
+                $("#addmeasurement-variable-unit").val(variableUnit.abbreviatedName);
+
+            }
+        });
 
 	});
 };
