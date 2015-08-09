@@ -78,8 +78,16 @@ var onQmRcdMstButtonClicked = function () {
     var name = $("#addmeasurement-variable-name").val();
 
     if (name == '') {
-        alert("Please enter the variable name.");
+
+        $('.validation-holder span').text('Please enter the variable name');
+        $('#addmeasurement-variable-name').addClass('error');
+
         return;
+    } else {
+
+        $('.validation-holder').text('');
+        $('#addmeasurement-variable-name').removeClass('error');
+
     }
 
     var n_value = getVariableWithName(name);
@@ -576,5 +584,12 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(function(){
         inputField.focus();
     }, 50);
+
+    $('#addmeasurement-variable-name').keypress(function () {
+        if ($(this).val().length > 0) {
+            $('#addmeasurement-variable-name').removeClass('error');
+            $('.validation-holder span').text('');
+        }
+    })
 
 });
