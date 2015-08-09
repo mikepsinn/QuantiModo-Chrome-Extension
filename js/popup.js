@@ -399,8 +399,13 @@ var loadVariables = function () {
                     method: 'GET',
                     url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val(),
                     success: function (data) {
+                        variables = data;
                         resp($.map(data, function (variable) {
-                            return variable.name;
+                            return {
+                                label: variable.name,
+                                value: variable.name,
+                                variable: variable
+                            }
                         }));
                     }
                 })
@@ -409,7 +414,8 @@ var loadVariables = function () {
             select: function (event, ui) {
 
                 document.getElementById("addmeasurement-variable-value").focus();
-                var variable = getVariableWithName(ui.item.label);
+                //var variable = getVariableWithName(ui.item.label);
+                var variable = ui.item.variable;
                 $("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
                 if (variable == null) return;
                 $("#addmeasurement-variable-category").val(variable.category);
