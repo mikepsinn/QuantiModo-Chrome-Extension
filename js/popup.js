@@ -328,22 +328,26 @@ var getUnitWithAbbriatedName = function (unitAbbr) {
 var loadVariableCategories = function () {
     var request = {message: "getVariableCategories", params: {}};
 
-    chrome.extension.sendMessage(request, function (responseText) {
-        variables = $.parseJSON(responseText);
-        var varnames = [];
-        var categories = [];
-        variableCategorySelect = document.getElementById('addmeasurement-variable-category');
-        $.each(variables.sort(function (a, b) {
-            return a.name.localeCompare(b.name);
-        }), function (_, variable) {
-            //varnames.push({label: variable.name, category: variable.category});
-            varnames.push(variable.name);
-            categories.push(variable.name);
-        });
+    chrome.extension.sendMessage(request, function (response) {
 
-        categories.sort();
-        for (var i = 0; i < categories.length; i++)
-            variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+        handleResponse(response, function (variableCategories) {
+            var variables = variableCategories;
+
+            var varnames = [];
+            var categories = [];
+            variableCategorySelect = document.getElementById('addmeasurement-variable-category');
+            $.each(variables.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            }), function (_, variable) {
+                //varnames.push({label: variable.name, category: variable.category});
+                varnames.push(variable.name);
+                categories.push(variable.name);
+            });
+
+            categories.sort();
+            for (var i = 0; i < categories.length; i++)
+                variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
+        });
 
     });
 };
@@ -367,31 +371,21 @@ var loadVariables = function () {
 
     var request = {message: "getVariables", params: {}};
 
-    chrome.extension.sendMessage(request, function (responseText) {
-        //unitSelect = document.getElementById('addmeasurement-variable-name');
-        variables = $.parseJSON(responseText);
-        var varnames = [];
-        var categories = [];
-        variableCategorySelect = document.getElementById('addmeasurement-variable-category');
-        $.each(variables.sort(function (a, b) {
-            return a.name.localeCompare(b.name);
-        }), function (_, variable) {
-            //varnames.push({label: variable.name, category: variable.category});
-            varnames.push(variable.name);
-            /* commented to fill category ....
-             if ($.inArray(variable.category, categories)==-1) {
-             categories.push(variable.category);
-             }
-             */
+    chrome.extension.sendMessage(request, function (response) {
+
+        handleResponse(response, function (variables) {
+
+            var variables = variables;
+            var varnames = [];
+            var categories = [];
+            var variableCategorySelect = document.getElementById('addmeasurement-variable-category');
+            $.each(variables.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            }), function (_, variable) {
+                varnames.push(variable.name);
+            });
 
         });
-
-        /*
-         categories.sort();
-         for(var i=0; i<categories.length; i++)
-         variableCategorySelect.options[variableCategorySelect.options.length] = new Option(categories[i], categories[i]);
-         */
-
 
         $("#addmeasurement-variable-name").autocomplete({
             source: function (req, resp) {
@@ -428,23 +422,27 @@ var loadVariables = function () {
         });
 
     });
+
 };
 
 
 var loadVariableUnits = function () {
 
     var request = {message: "getVariableUnits", params: {}};
-    chrome.extension.sendMessage(request, function (responseText) {
-        unitSelect = document.getElementById('addmeasurement-variable-unit');
-        units = $.parseJSON(responseText);
+    chrome.extension.sendMessage(request, function (response) {
 
-        $.each(units.sort(function (a, b) {
-            return a.name.localeCompare(b.name);
-        }), function (_, unit) {
-            unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+        handleResponse(response, function (units) {
+            var units = units;
+            var unitSelect = document.getElementById('addmeasurement-variable-unit');
+
+            $.each(units.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            }), function (_, unit) {
+                unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+
+            });
 
         });
-
     });
 
 };
@@ -455,15 +453,17 @@ var loadAddVariableUnits = function () {
 
 
     var request = {message: "getVariableUnits", params: {}};
-    chrome.extension.sendMessage(request, function (responseText) {
-        unitSelect = document.getElementById('add-addmeasurement-variable-unit');
-        units = $.parseJSON(responseText);
+    chrome.extension.sendMessage(request, function (response) {
 
-        $.each(units.sort(function (a, b) {
-            return a.name.localeCompare(b.name);
-        }), function (_, unit) {
-            unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+        handleResponse(response, function (untis) {
+            var units = response;
+            var unitSelect = document.getElementById('add-addmeasurement-variable-unit');
 
+            $.each(units.sort(function (a, b) {
+                return a.name.localeCompare(b.name);
+            }), function (_, unit) {
+                unitSelect.options[unitSelect.options.length] = new Option(unit.name, unit.abbreviatedName);
+            });
         });
 
     });
@@ -537,14 +537,34 @@ var loadAddDateTime = function () {
 
 };
 
+var handleResponse = function (response, callback) {
+    if (response.status == 401) {
+        //go to login screen
+
+        $('body').css('width', '270px');
+        $('#record_a_measurement_block').hide();
+        $('#edt_record_a_measurement_block').hide();
+        $('#add_record_a_measurement_block').hide();
+
+        $("#signup_block").show();
+
+    } else {
+        var parsedResponse = JSON.parse(response.responseText);
+        callback(parsedResponse);
+    }
+
+};
+
 document.addEventListener('DOMContentLoaded', function () {
     setBlockHideShow();
     setButtonListeners();
+
+
     loadVariables();
     loadVariableCategories();
-
     loadVariableUnits();
     loadAddVariableUnits();
+
 
     loadAddDateTime();
     loadDateTime();
