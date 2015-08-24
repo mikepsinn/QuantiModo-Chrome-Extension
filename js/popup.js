@@ -46,8 +46,8 @@ function setButtonListeners() {
 
      */
 
-    document.getElementById('button_quantimo_facebook_sign_in').onclick = onQmFacebookButtonClicked;
-    document.getElementById('button_quantimo_google_sign_in').onclick = onQmGoogleButtonClicked;
+    //document.getElementById('button_quantimo_facebook_sign_in').onclick = onQmFacebookButtonClicked;
+    //document.getElementById('button_quantimo_google_sign_in').onclick = onQmGoogleButtonClicked;
     document.getElementById('button_quantimo_sign_in').onclick = onQmSignButtonClicked;
 
     document.getElementById('button-record-a-measurement').onclick = onQmRcdMstButtonClicked;
