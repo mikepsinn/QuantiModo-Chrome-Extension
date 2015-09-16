@@ -437,7 +437,7 @@ var loadVariables = function () {
 
                 var variableUnit = null;
                 var variableValue = '';
-                var lastMeasurementForVariable = localCache.getSubmitterMeasurement(variable.name);
+                var lastMeasurementForVariable = localCache.getSubmittedMeasurement(variable.name);
 
                 if (lastMeasurementForVariable) {
 
@@ -669,7 +669,7 @@ var localCache = {
 
     },
 
-    getSubmitterMeasurement: function (name) {
+    getSubmittedMeasurement: function (name) {
 
         var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
 
