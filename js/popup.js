@@ -219,6 +219,8 @@ var onEdtButtonClicked = function () {
         var response = $.parseJSON(responseText);
         //alert (response) ;
         if (response.success == true) {
+            //save measurement to pre-populate this values next time
+            localCache.setSubmittedMeasurement(name, value, unit);
             document.getElementById('addmeasurement-variable-value').value = "";
             //document.getElementById('edt-addmeasurement-variable-value').value = "";
             window.close();
@@ -293,6 +295,9 @@ var onAddButtonClicked = function () {
     chrome.extension.sendMessage(request, function (responseText) {
         var response = $.parseJSON(responseText);
         if (response.success == true) {
+
+            localCache.setSubmittedMeasurement(name, value, unit);
+
             document.getElementById('addmeasurement-variable-value').value = "";
             document.getElementById('add-addmeasurement-variable-value').value = "";
             window.close();
@@ -429,10 +434,34 @@ var loadVariables = function () {
                 $("input[name='combineOperation'][value='" + variable.combinationOperation + "']").prop('checked', true);
                 if (variable == null) return;
                 $("#addmeasurement-variable-category").val(variable.category);
-                var variableUnit = getUnitWithAbbriatedName(variable.unit);
+
+                var variableUnit = null;
+                var variableValue = '';
+                var lastMeasurementForVariable = localCache.getSubmitterMeasurement(variable.name);
+
+                if (lastMeasurementForVariable) {
+
+                    variableUnit = getUnitWithAbbriatedName(lastMeasurementForVariable.unit);
+                    variableValue = lastMeasurementForVariable.value;
+
+                } else {
+
+                    if (variable.mostCommonUnit) {
+                        variableUnit = getUnitWithAbbriatedName(variable.mostCommonUnit);
+                    } else {
+                        variableUnit = getUnitWithAbbriatedName(variable.abbreviatedUnitName);
+                    }
+
+                    if (variable.mostCommonValue) {
+                        variableValue = variable.mostCommonValue;
+                    }
+
+                }
+
                 if (variableUnit == null) return;
                 $("#addmeasurement-variable-unitCategory").val(variableUnit.category).trigger('change');
                 $("#addmeasurement-variable-unit").val(variableUnit.abbreviatedName);
+                $("#addmeasurement-variable-value").val(variableValue);
 
             }
         });
@@ -605,3 +634,58 @@ document.addEventListener('DOMContentLoaded', function () {
     })
 
 });
+
+var localCache = {
+
+    setSubmittedMeasurement: function (name, value, unit) {
+
+        var storageEntry = {
+            variable: name,
+            value: value,
+            unit: unit
+        };
+
+        var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
+
+        if (!lastSubmittedMeasurements) {
+            lastSubmittedMeasurements = [];
+            lastSubmittedMeasurements.push(storageEntry);
+        } else {
+            lastSubmittedMeasurements = JSON.parse(lastSubmittedMeasurements);
+
+            for (var i = 0; i < lastSubmittedMeasurements.length; i++) {
+                if (lastSubmittedMeasurements[i].variable == name) {
+                    lastSubmittedMeasurements[i].value = value;
+                    lastSubmittedMeasurements[i].unit = unit;
+                    break;
+                }
+                if (i == lastSubmittedMeasurements.length - 1) {
+                    lastSubmittedMeasurements.push(storageEntry);
+                }
+            }
+        }
+
+        localStorage.setItem('lastSubmittedMeasurements', JSON.stringify(lastSubmittedMeasurements));
+
+    },
+
+    getSubmitterMeasurement: function (name) {
+
+        var lastSubmittedMeasurements = localStorage.getItem('lastSubmittedMeasurements');
+
+        if (!lastSubmittedMeasurements) {
+            return null;
+        } else {
+            lastSubmittedMeasurements = JSON.parse(lastSubmittedMeasurements);
+
+            for (var i = 0; i < lastSubmittedMeasurements.length; i++) {
+                if (lastSubmittedMeasurements[i].variable == name) {
+                    return lastSubmittedMeasurements[i];
+                }
+            }
+        }
+
+    }
+
+}
+
