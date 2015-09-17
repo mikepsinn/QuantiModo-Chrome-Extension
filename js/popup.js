@@ -539,7 +539,7 @@ var loadDateTime = function () {
     var currentTime = new Date();
 
     var j_years = currentTime.getFullYear();
-    var j_months = currentTime.getMonth();
+    var j_months = currentTime.getMonth() + 1;
     var j_date = currentTime.getDate();
 
     var j_hours = addZero(currentTime.getHours());
@@ -570,7 +570,7 @@ var loadAddDateTime = function () {
     var currentTime = new Date();
 
     var j_years = currentTime.getFullYear();
-    var j_months = currentTime.getMonth();
+    var j_months = currentTime.getMonth() + 1;
     var j_date = currentTime.getDate();
 
     var j_hours = addZero(currentTime.getHours());
