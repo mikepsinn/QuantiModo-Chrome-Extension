@@ -412,7 +412,7 @@ var loadVariables = function () {
             source: function (req, resp) {
                 $.ajax({
                     method: 'GET',
-                    url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val(),
+                    url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val() + '?includePublic=true',
                     success: function (data) {
                         variables = data;
                         resp($.map(data, function (variable) {
