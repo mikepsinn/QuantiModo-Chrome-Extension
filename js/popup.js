@@ -46,8 +46,8 @@ function setButtonListeners() {
 
      */
 
-    //document.getElementById('button_quantimo_facebook_sign_in').onclick = onQmFacebookButtonClicked;
-    //document.getElementById('button_quantimo_google_sign_in').onclick = onQmGoogleButtonClicked;
+    document.getElementById('button_quantimo_facebook_sign_in').onclick = onQmFacebookButtonClicked;
+    document.getElementById('button_quantimo_google_sign_in').onclick = onQmGoogleButtonClicked;
     document.getElementById('button_quantimo_sign_in').onclick = onQmSignButtonClicked;
 
     document.getElementById('button-record-a-measurement').onclick = onQmRcdMstButtonClicked;
@@ -117,7 +117,6 @@ var btnQuantiModoRegisterClick = function () {
 };
 
 
-// registration button clicked
 var btnQuantiModoLogoCorrelateClick = function () {
     chrome.tabs.create({url: "https://app.quantimo.do/correlate/"});
 };
@@ -125,17 +124,17 @@ var btnQuantiModoLogoCorrelateClick = function () {
 
 // registration button clicked
 var onRegisterAClicked = function () {
-    chrome.tabs.create({url: "https://app.quantimo.do/citizen-science/register/"});
+    chrome.tabs.create({url: "https://app.quantimo.do/api/v2/auth/register"});
 };
 
 // facebook button clicked
 var onQmFacebookButtonClicked = function () {
-    chrome.tabs.create({url: "https://app.quantimo.do/wp-login.php?action=wordpress_social_authenticate&provider=Facebook&redirect_to=https%3A%2F%2Fquantimo.do%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fquantimo.do"});
+    chrome.tabs.create({url: "https://app.quantimo.do/api/v2/auth/social/webLogin?provider=facebook"});
 };
 
 // google button clicked
 var onQmGoogleButtonClicked = function () {
-    chrome.tabs.create({url: "https://app.quantimo.do/wp-login.php?action=wordpress_social_authenticate&provider=Google&redirect_to=https%3A%2F%2Fquantimo.do%2Fwp-login.php%3Fredirect_to%3Dhttps%253A%252F%252Fquantimo.do"});
+    chrome.tabs.create({url: "https://app.quantimo.do/api/v2/auth/social/webLogin?provider=google"});
 };
 
 // Simple Sign In button clicked
@@ -417,7 +416,7 @@ var loadVariables = function () {
             source: function (req, resp) {
                 $.ajax({
                     method: 'GET',
-                    url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val(),
+                    url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val() + '?includePublic=true',
                     success: function (data) {
                         variables = data;
                         if (data) {
