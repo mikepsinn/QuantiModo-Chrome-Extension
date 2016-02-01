@@ -144,7 +144,7 @@ var onQmSignButtonClicked = function () {
 
 
 var onQmButtonClicked = function () {
-    chrome.tabs.create({url: "https://quantipress.quantimo.do/import-data/"});
+    chrome.tabs.create({url: "https://app.quantimo.do/api/v2/account/connectors"});
 };
 var onCloseButtonClicked = function () {
     window.close();

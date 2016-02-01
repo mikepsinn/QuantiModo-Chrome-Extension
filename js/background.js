@@ -13,7 +13,7 @@ function isUserLoggedIn(resultListener)
 		  console.log(cookie.value);
 		}
 		else {
-			var url = "https://quantipress.quantimo.do/import-data";
+			var url = "https://app.quantimo.do/api/v2/account/connectors";
 			chrome.tabs.create({"url":url, "selected":true});
 		}
 	});
