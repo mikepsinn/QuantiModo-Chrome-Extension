@@ -144,7 +144,7 @@ var onQmSignButtonClicked = function () {
 
 
 var onQmButtonClicked = function () {
-    chrome.tabs.create({url: "https://app.quantimo.do/analyze"});
+    chrome.tabs.create({url: "https://app.quantimo.do/api/v2/account/connectors"});
 };
 var onCloseButtonClicked = function () {
     window.close();
@@ -320,11 +320,16 @@ var onVariableNameInputUnfocussed = function () {
 };
 
 var getVariableWithName = function (variableName) {
-    var filteredVars = jQuery.grep(variables, function (variable, i) {
-        return variable.name == variableName;
-    });
-    if (filteredVars.length > 0) return filteredVars[0];
-    return null;
+    if (variables) {
+        var filteredVars = jQuery.grep(variables, function (variable, i) {
+            return variable.name == variableName;
+        });
+        if (filteredVars.length > 0) return filteredVars[0];
+        return null;
+    } else {
+        return null;
+    }
+
 };
 
 var getUnitWithAbbriatedName = function (unitAbbr) {
@@ -414,13 +419,18 @@ var loadVariables = function () {
                     url: 'https://app.quantimo.do/api/variables/search/' + $("#addmeasurement-variable-name").val() + '?includePublic=true',
                     success: function (data) {
                         variables = data;
-                        resp($.map(data, function (variable) {
-                            return {
-                                label: variable.name,
-                                value: variable.name,
-                                variable: variable
-                            }
-                        }));
+                        if (data) {
+                            resp($.map(data, function (variable) {
+                                return {
+                                    label: variable.name,
+                                    value: variable.name,
+                                    variable: variable
+                                }
+                            }));
+                        } else {
+                            resp(null);
+                        }
+
                     }
                 })
             },
