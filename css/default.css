@@ -420,3 +420,11 @@ button, .button, input[type=submit] {
     box-shadow: 0px 1px 10px #ff0000;
     outline: none;
 }
+
+#reminders-block {
+    margin: 5px
+}
+
+.main-buttons .button {
+    margin: 5px
+}
