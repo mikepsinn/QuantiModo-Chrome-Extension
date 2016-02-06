@@ -24,6 +24,7 @@ function setBlockHideShow() {
     $("#record_a_measurement_block").hide();
     $("#edt_record_a_measurement_block").hide();
     $("#add_record_a_measurement_block").hide();
+    $("#reminders-block").hide();
 
     chrome.cookies.get({url: 'https://app.quantimo.do', name: 'wordpress_logged_in_c9005e0fb733417360658b145e2ed413'},
         function (cookie) {
@@ -64,6 +65,8 @@ function setButtonListeners() {
     document.getElementById('logo-correlate').onclick = btnQuantiModoLogoCorrelateClick;
     document.getElementById('logo-correlate-1').onclick = btnQuantiModoLogoCorrelateClick;
     document.getElementById('logo-correlate-2').onclick = btnQuantiModoLogoCorrelateClick;
+
+    document.getElementById('button-show-reminders').onclick = onShowRemindersClick;
 
     //var optionsUrl = chrome.extension.getURL("src/options/options.html");
     //var content = '<a href="' + optionsUrl + '" target="_blank">Options</a>';
@@ -106,6 +109,12 @@ var onQmRcdMstButtonClicked = function () {
     }
 
 }
+
+var onShowRemindersClick = function () {
+    console.debug('Show Reminders Clicked');
+    $('.content-block').hide();
+    $('#reminders-block').show();
+};
 
 
 // registration button clicked
@@ -232,7 +241,6 @@ var onEdtButtonClicked = function () {
 
     clearNotifications();
 };
-
 
 var onAddButtonClicked = function () {
     // Create an array of measurements
