@@ -29,8 +29,7 @@ function isUserLoggedIn(resultListener)
 */
 chrome.runtime.onInstalled.addListener(function()
 {
-	//var notificationInterval = parseInt(localStorage["notificationInterval"] || "180");
-	var notificationInterval = -1;
+	var notificationInterval = parseInt(localStorage["notificationInterval"] || "60");
 
 	if(notificationInterval == -1)
 	{
@@ -57,7 +56,7 @@ chrome.alarms.onAlarm.addListener(function(alarm)
 			type: "basic",
 			title: "How are you?",
 			message: "It's time to add a measurement!",
-			iconUrl: "images/photo.png",
+			iconUrl: "QM-LOGO-ICON-Chrome-128-128.png",
 			priority: 2
 		}
 		chrome.notifications.create("trackReportNotification", notificationParams, function(id){});

@@ -26,7 +26,7 @@
 <div class="addmeasurement-content" id="addmeasurement-dialog-content">
 
 
-    <div id="signup_block" style="margin:6px;">
+    <div id="signup_block" class="content-block" style="margin:6px;">
 
         <div class="window form-window visible">
             <div class="container register-window">
@@ -45,7 +45,8 @@
 
     </div>
 
-    <div id="record_a_measurement_block" style="margin-top:-6px; margin-left:10px; margin-right:4px;">
+    <div id="record_a_measurement_block" class="content-block"
+         style="margin-top:-6px; margin-left:10px; margin-right:4px;">
         <div style="float:left;"><h3>What do you want to track?</h3></div>
         <div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo" id="logo-correlate"><img
                 src="images/logo-full.png" alt="Better living through data." width=100></a></div>
@@ -61,8 +62,9 @@
             <div id="snd_gap" style="height:10px;">&nbsp;</div>
 
             <center>
-                <div>
+                <div class="main-buttons">
                     <button id="button-record-a-measurement" class="button login">Record a Measurement</button>
+                    <button id="button-show-reminders" class="button login">Reminders</button>
                 </div>
                 <div style='float:right; margin-top:-20px;'><a href="#" title="QuantiModo"
                                                                id="btnQuantiModoRegister"><img
@@ -74,7 +76,8 @@
     </div>
 
 
-    <div id="edt_record_a_measurement_block" style="margin-top:0px; margin-left:10px; margin-right:4px;">
+    <div id="edt_record_a_measurement_block" class="content-block"
+         style="margin-top:0px; margin-left:10px; margin-right:4px;">
         <div style="float:left;"><h3>What do you want to track?</h3></div>
         <div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo"
                                                                         id="logo-correlate-1"><img
@@ -94,7 +97,8 @@
                 </td>
                 <td width="35%">
                     <input id="addmeasurement-variable-unitCategory" type="hidden">
-                    <select id="addmeasurement-variable-unit" style="margin-left: 2%; font-weight:bold" disabled></select></td>
+                    <select id="addmeasurement-variable-unit" style="margin-left: 2%; font-weight:bold"
+                            disabled></select></td>
                 <td>
                     <input id="addmeasurement-variable-date" type="text" placeholder="Date"
                            style="margin-left:2%;width:80%;font-weight:bold"> <span style="float:right;margin-top:-1px"><img
@@ -114,7 +118,8 @@
 
     </div>
 
-    <div id="add_record_a_measurement_block" class="content-block" style="margin-top:0px; margin-left:10px; margin-right:4px;">
+    <div id="add_record_a_measurement_block" class="content-block"
+         style="margin-top:0px; margin-left:10px; margin-right:4px;">
         <div style="float:left;"><h3>Create a New Variable</h3></div>
         <div style="float:right; margin-right:8px; margin-top:14px;"><a href="#" title="QuantiModo"
                                                                         id="logo-correlate-2"><img
@@ -179,9 +184,20 @@
 
     </div>
 
+    <div id="reminders-block" class="content-block">
+
+        <iframe src="https://app.quantimo.do/ionic/Modo/www/#/app/reminders-inbox" width="100%" height="300"
+                frameborder="0">
+
+        </iframe>
+
+    </div>
+
 
 </div>
+
 <script src="js/libs/jquery.datetimepicker.js"></script>
+
 </body>
 </html>
 
