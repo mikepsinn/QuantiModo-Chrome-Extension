@@ -7,16 +7,27 @@
 */
 function isUserLoggedIn(resultListener)
 {
-	chrome.cookies.get({ url: 'https://app.quantimo.do', name: 'wordpress_logged_in_c9005e0fb733417360658b145e2ed413' },
-	  function (cookie) {
-		if (cookie) {
-		  console.log(cookie.value);
-		}
-		else {
-			var url = "https://app.quantimo.do/api/v2/account/connectors";
-			chrome.tabs.create({"url":url, "selected":true});
-		}
-	});
+
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "https://app.quantimo.do/api/user/me", true);
+	xhr.onreadystatechange = function()
+		{
+			if (xhr.readyState == 4)
+			{
+				var userObject = JSON.parse(xhr.responseText);
+				/*
+				 * it should hide and show sign in button based upon the cookie set or not
+				 */
+				if(typeof userObject['displayName'] !== "undefined")
+				{
+						console.log(userObject['displayName'] + " is logged in.  ");
+				} else {
+					var url = "https://app.quantimo.do/api/v2/account/connectors";
+					chrome.tabs.create({"url":url, "selected":true});
+				}
+			}
+		};
+	xhr.send();
 }
 
 
