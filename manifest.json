@@ -3,7 +3,7 @@
 
   "name": "QuantiModo Universal Tracker",
   "description": "Track anything in seconds by just clicking the QuantiModo button in your browser!",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "options_page": "options/options.html",
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "icons": {"16"	: "images/QM-LOGO-ICON-Chrome-128-128.png",
